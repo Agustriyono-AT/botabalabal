@@ -1,1 +1,6631 @@
   "Allahumma innii as-aluka ‘ilman naafi’a, wa rizqon thoyyibaa, wa ‘amalan mutaqobbalaa."
+
+ 
+  
+  <?php 
+ 
+ 
+// header("Refresh:520");
+header("Cache-Control: no-cache");
+header("Pragma: no-cache");
+$cokie=$_COOKIE["pilih"];
+  //echo "$cokie";
+
+ 
+   
+function book() {
+  // sleep(1);
+ static $ch = null;
+ if (is_null($ch)) {
+ $ch = curl_init();
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; kandang ayam; '.php_uname('s').'; PHP/'.phpversion().')'); 
+ 
+ }
+ 
+ $proxy=$_COOKIE["proxy"];
+ $cokie=$_COOKIE["pilih"];
+ 
+ if ($proxy==1){
+ 
+  curl_setopt($ch, CURLOPT_URL, "https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/depth/$cokie");
+ }
+ else
+ {
+ curl_setopt($ch, CURLOPT_URL,"https://indodax.com/api/depth/$cokie");
+ }
+ 
+ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+ curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+ 
+ $res = curl_exec($ch);
+ if(curl_errno($ch))
+{
+     echo '<meta http-equiv="refresh" content="10"><div class="bg-danger"  > Curl error: ' . curl_error($ch) .'</div>';
+
+    }
+  if ($res === false) throw new Exception('Could not get reply:
+  '.curl_error($ch));
+
+$dec = var_export($res, true);
+ $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $seko = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+ 
+ echo"info curl book | speed : $seko"; 
+ curl_close($ch);
+ 
+ $ch = null;
+ return $dec;
+}
+
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+function histo() {
+  // sleep(1);
+ static $ch = null;
+ if (is_null($ch)) {
+ $ch = curl_init();
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; kandang ayam; '.php_uname('s').'; PHP/'.phpversion().')'); 
+ 
+ }
+ 
+ $proxy=$_COOKIE["proxy"];
+ $cokie=$_COOKIE["pilih"];
+ 
+ if ($proxy==1){
+ 
+  curl_setopt($ch, CURLOPT_URL, "https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/trades/$cokie");
+ }
+ else
+ {
+ curl_setopt($ch, CURLOPT_URL,"https://indodax.com/api/trades/$cokie");
+ }
+ 
+ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+ curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+ 
+ $res = curl_exec($ch);
+ if(curl_errno($ch))
+{
+     echo '<meta http-equiv="refresh" content="10"><div class="bg-danger"  > Curl error: ' . curl_error($ch) .'</div>';
+
+    }
+  if ($res === false) throw new Exception('Could not get reply:
+  '.curl_error($ch));
+
+$dec = var_export($res, true);
+ $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $seko = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+ 
+ echo"info curl history | speed : $seko"; 
+ curl_close($ch);
+ 
+ $ch = null;
+ return $dec;
+}
+
+ 
+  
+  
+  
+  
+  
+  
+  
+ 
+function get_summaries() {
+ //  sleep(1);
+ static $ch = null;
+ if (is_null($ch)) {
+ $ch = curl_init();
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; kandang ayam; '.php_uname('s').'; PHP/'.phpversion().')'); 
+ 
+ }
+ 
+ $proxy=$_COOKIE["proxy"];
+ 
+ 
+ if ($proxy==1){
+ 
+  curl_setopt($ch, CURLOPT_URL, 'https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/summaries');
+ }
+ else
+ {
+ curl_setopt($ch, CURLOPT_URL, 'https://indodax.com/api/summaries');
+ }
+ //$headers = array(
+  // "Connection: keep-alive",
+  // "Keep-Alive: timeout=5, max=100",
+///);
+curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+ 
+ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+ curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+ 
+ $res = curl_exec($ch);
+ if(curl_errno($ch))
+{
+     echo '<meta http-equiv="refresh" content="6"><div class="bg-danger"  > Curl error: ' . curl_error($ch) .'</div>';
+
+    }
+  if ($res === false) throw new Exception('Could not get reply:
+  '.curl_error($ch));
+
+$dec = var_export($res, true);
+ $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $seko = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+ 
+ echo"| info curl summaries| speed : $seko  |"; 
+ curl_close($ch);
+ 
+ $ch = null;
+ return $dec;
+}
+
+ 
+  
+  
+function privateapi($method, array $req = array()) {
+ //sleep(1);
+ $key = ' API EY'; 
+ $secret = 'SCREET KEY'; 
+
+//var post ='method=tradeHistory&count=200&pair='+namaalt+'&nonce='+nonceg;
+  $cokie=$_COOKIE["pilihalt"];
+  $req['method'] = $method;
+  $req['pair'] = $cokie;
+  $req['count'] = 100 ;
+ 
+ 
+ $req['nonce'] = time();
+
+ 
+ $post_data = http_build_query($req, '', '&');
+ 
+ $sign = hash_hmac('sha512', $post_data, $secret);
+ 
+ $headers = array(
+'Sign: '.$sign,
+'Key: '.$key,
+ ); 
+ static $ch = null;
+ if (is_null($ch)) {
+ $ch = curl_init();
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible;
+kandang ayam  ; '.php_uname('s').'; PHP/'.phpversion().')');
+ }
+ curl_setopt($ch, CURLOPT_URL, 'https://indodax.com/tapi');
+ curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+ 
+// echo"$post_data";
+ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+ curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+ 
+ $res = curl_exec($ch);
+   $seko = curl_getinfo($ch, CURLINFO_TOTAL_TIME);
+ 
+ echo" | info curl api | speed : $seko"; 
+ if(curl_errno($ch))
+{
+    echo '<meta http-equiv="refresh" content="6"><div class="bg-danger"  > Curl error: ' . curl_error($ch) .'</div>';
+}
+ if ($res === false) throw new Exception('Could not get reply:
+ '.curl_error($ch));
+
+$dec = var_export($res, true);
+ 
+ curl_close($ch);
+ $ch = null;
+ return $dec;
+}
+
+
+  $cokieblnc=$_COOKIE["balance"];    
+ if ( $cokieblnc   ==1){ 
+ $balance = privateapi('getInfo'); 
+ $lastrade = privateapi('tradeHistory'); 
+ $jsonbalance = str_replace("'", "", $balance);
+
+$jsonlastrade = str_replace("'", "", $lastrade);
+
+ // echo $lastrade;
+ //echo $jsonbalance;
+ 
+$res= json_decode($jsonbalance,true);
+
+ $decoded_json = json_decode($jsonbalance, true);
+$hasil= $decoded_json['success'];
+//echo $hasil;
+
+ $decoded_json2 = json_decode($jsonlastrade, true);
+$hasil2= $decoded_json2['success'];
+ //echo $hasil2;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+if($hasil == 1 ){
+
+ $filebalance = fopen("api/balance.txt", "w");
+ $strfilebalance = $jsonbalance;
+ fwrite($filebalance, $strfilebalance);
+ fclose($filebalance);
+ }
+ 
+if($hasil2 == 1 ){
+$cokie=$_COOKIE["pilih"];
+ 
+
+ $filelastrade = fopen("api/lastrade$cokie.txt", "w");
+ $strfilelastrade = $jsonlastrade;
+ fwrite($filelastrade, $strfilelastrade);
+ fclose($filelastrade);
+  
+  
+   
+ }
+ }
+ 
+ 
+ 
+ 
+ 
+$summaries = get_summaries('info'); 
+$json = str_replace("'", "", $summaries);
+ 
+
+$book = book('info'); 
+$jsonbook = str_replace("'", "", $book);
+ 
+$histo = histo('info'); 
+$jsonhisto = str_replace("'", "", $histo);
+//echo"$jsonhisto";
+
+
+
+
+
+
+
+
+ $panj=strlen($json);
+ 
+ if ($panj > 3000){
+ $random_file = fopen(  "api/sumaries.txt", "w");
+ $str = $json;
+ fwrite($random_file, $str);
+ fclose($random_file);
+ 
+ }
+  
+
+ //  sleep(2);
+
+ 
+ ?>
+
+
+
+<script> 
+ var myTime=0;
+function getDateTimeFromTimestamp(unixTimeStamp) {
+    let date = new Date(unixTimeStamp);
+    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() + ' ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+}
+ 
+const checkOnlineStatus = async () => {
+  try {
+    const online = await fetch("https://indodax.com/api/server_time");
+	var timeku=await  online.text()
+	const obj = JSON.parse(timeku);
+	var aku=obj.server_time; 
+ 
+  myTime = getDateTimeFromTimestamp(aku); 
+ 	  
+	 
+	  //document.getElementById("parameter3").innerHTML  = ""; 
+	  document.getElementById("tt").innerHTML  =   "🌏 "+myTime +"<br>";
+      
+
+ 
+	
+    return online.status >= 200 && online.status < 300; // either true or false
+  } catch (err) {
+    return false; // definitely offline
+  }
+};
+
+setInterval(async () => {
+  const result = await checkOnlineStatus();
+  const statusDisplay = document.getElementById("parameterk");
+  statusDisplay.textContent = result  ? "🌏 Internet online" : "🔴 Internet offline"; 
+   
+}, 5000 );  
+
+// forgot to include async load event listener in the video! 
+window.addEventListener("load", async (event) => {
+  const statusDisplay = document.getElementById("parameterk");
+  statusDisplay.textContent = (await checkOnlineStatus())
+    ? "🌏 Internet online" : "🔴 Internet offline"; 
+});
+ 
+ 
+  
+ 
+  
+ 
+ ///////////////////////////////////
+ 
+ 
+ 
+ 
+  var dolark =0;
+ var dolar =0;
+ var hdolar =0;
+  var ldolar =0;
+Promise.all([
+            fetch("https://data-asg.goldprice.org/GetData/IDR-XAU/1").then(value => value.json()),
+            fetch("https://data-asg.goldprice.org/GetData/USD-XAU/1").then(value => value.json()),
+            fetch("https://api.bitfinex.com/v1/pubticker/xaut:usd").then(value => value.json()),
+          
+		   ])
+            .then( function(value) {
+				
+				var akuu=value[0];
+				var bbbb = akuu.toString().split(',');
+				    aaaa = bbbb[1];//goldidr
+					
+					
+					var akuu2=value[1];
+				var bbbb2 = akuu2.toString().split(',');
+				    aaaa2 = bbbb2[1];//goldusd
+					
+					
+					///bfx
+				var lastxau=value[2]["last_price"];
+                var highxau=value[2]["high"];
+                       var lowxau=value[2]["low"];
+ 
+ //console.log(lastxau +' sssssss'+highxau+ ' sssssssss' +lowxau);	
+				 
+					 hdolar=aaaa/highxau ;
+				ldolar=aaaa/lowxau ;
+
+//alert(ldolar);
+
+                   dolar = aaaa /lastxau;
+
+ dolark = aaaa /aaaa2;
+
+
+
+
+if (lastxau > 10 ){				
+	var nonce=Math.floor(Date.now() / 1000);					
+						
+	 var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS xaulog (id unique, last,high,low)');   
+ tx.executeSql('INSERT INTO xaulog (id, last,high,low) VALUES ('+nonce+', '+lastxau+', '+highxau+', '+lowxau+')');  
+ });  
+  					
+		}					
+					
+						  
+						
+						
+						
+		if (dolar > 1000){				
+	var nonce=Math.floor(Date.now() / 1000);					
+						
+	 var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS dolar (id unique, idr)');   
+ tx.executeSql('INSERT INTO dolar (id, idr) VALUES ('+nonce+', '+dolar+')');  
+ });  
+  					
+		}	
+
+
+ 		
+ //alert(dolar);
+ 
+     
+		   })  
+ 
+           
+
+
+
+ 
+
+
+</script>
+ 
+
+
+
+ 
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<head>
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+ 
+    <!-- Custom styles for this template-->
+    <link href="css/styles.css" rel="stylesheet">  
+ 
+        </head>
+ 
+ <style>
+ 
+ html, body {
+    min-height: 100%;
+ }
+body { background-color:   ; }
+
+ 
+progress::-webkit-progress-bar {background-color: #192926; width: 100%;}
+progress {background-color: #192926;}
+
+ 
+progress::-webkit-progress-value {background-color: red !important;}
+progress::-moz-progress-bar {background-color: red !important;}
+progress {color: red;}
+ p {
+  position: absolute;
+  transition: opacity .5s ease-in;
+}
+
+p + p { opacity: 0; }
+ table{
+  width: 300px;
+  height: 300px;
+}
+
+.class1{
+  background-color: red;
+  height: 30px;
+}
+
+.class2{
+  background-color: green;
+  height: 30px;
+}
+
+.class3{
+  background-color: black;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  float; left;
+}
+
+.div1{
+  position: relative;
+  height: 100%;
+}
+
+.div2{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: yellow;
+}
+.btn-group .button {
+  background-color: pink; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+   
+  float: left;
+}
+
+.btn-group .button:hover {
+  background-color: #3e8e41;
+}
+
+line {
+  display: block;
+  stroke: black;
+}
+
+  </style>
+ 
+     
+ 
+  <div class="progress rounded-0 ">  <progress class="col-lg-12   bg-white"    value="0"  id="progressBar"></progress> </div> 
+     
+   
+    
+   
+   
+
+ 
+ 
+   
+   
+  <table  id="body" class="table      table-bordered  text-danger table-sm " id="dataTable" width="100%"  cellspacing="0"  >
+<tr class="  text-center">
+<td  width="5%"> <button    id="20" onclick="setCookie('reload', '20', 7)">20 </button></td>
+<td   width="5%"> <button   id="60" onclick="setCookie('reload', '60', 7)">60 </button> </td>
+<td    width="5%"> <button   id="120" onclick="setCookie('reload', '120', 7)">120 </button> </td>
+
+<td    width="5%"> <button   id="180" onclick="setCookie('reload', '180', 7)">180 </button> </td>
+<td    width="5%"> <button   id="1000" onclick="setCookie('reload', '1000', 7)">1000 </button> </td>
+
+<td   width="10%"  colspan=2 > <div id="rr" > </div>  </td>
+<td   width="5%">   <div  id="parameterp"> </div>  </td> 
+ 
+ 
+ 
+<td  width="10%"  colspan=2>  <div  id="parameterk"> </div>  </td>
+ 
+ 
+ 
+<td    width="5%"> <div id="alerthttp" > </div></td>
+ <td    width="5%">sssss</td><td    width="5%">  </td><td    width="5%">sssss</td>
+  <td    width="10%"  colspan=2> <div id="tt" > </div> </td>
+ 
+<td  width="5%">	<button onclick="setCookie('proxy', '0', 7)">🟠  </button>
+<button onclick="setCookie('proxy', '1', 7)">🟢 </button> </td></td>
+ 
+<td    width="5%">	
+<button   id="balo"  onclick="setCookie('balance', '0', 7)"> 🟢   </button>
+<button   id="ball"  onclick="setCookie('balance', '1', 7)">  🟠</button> 
+</td>
+ 
+<td   width="5%">
+<button id="viro" onclick="setCookie('virtual', '0', 7)">🟠 </button>
+<button id="virl" onclick="setCookie('virtual', '1', 7)">🟢 </button>
+ </td>
+  <td   width="5%"> aaaaaa  </td> 
+   <td   width="5%"> aaaaaa  </td> 
+ 
+</tr>
+
+ 
+   
+     
+ 
+
+ 
+
+ 
+ 
+  <script type="text/javascript">
+ 
+  
+ 
+ 
+ 
+  function setCookiexxx(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	// alert(name);
+	// document.location.reload();
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	// alert(name);
+ 
+	  
+	  
+ var snd = new Audio('sounds/button_click_on.mp3');
+        snd.play();
+       // alert("Thank you!");
+ 
+	 document.location.reload();
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+ 
+ var rel = getCookie("reload");
+ 
+ 
+ document.getElementById(rel).disabled = true;
+ 
+ 
+ 
+  
+		 var timeleft = rel;
+var downloadTimer = setInterval(function(){
+//console.log(timeleft);
+     if(timeleft == 0){ 
+	 document.location.reload();
+  }
+ if(timeleft <= 0){
+    clearInterval(downloadTimer);
+	  
+  }
+    
+   document.getElementById("rr").innerHTML  =   " 🌏 Reload in   "+timeleft +" s<br>";
+  document.getElementById("progressBar").value = rel - timeleft;
+   document.getElementById("progressBar").max = rel;
+  timeleft -= 1;
+}, 1000);
+		   
+		   
+		   
+		   var current = 0,
+    slides = document.getElementsByTagName("p");
+
+setInterval(function() {
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].style.opacity = 0;
+  }
+  current = (current != slides.length - 1) ? current + 1 : 0;
+  slides[current].style.opacity = 1;
+}, 5000);
+	
+    </script>
+	
+ 
+
+
+
+    <tr  > 
+	 
+ 
+  
+  
+ 
+ <td    > <div class="chart-area"  id="buysell"></div>    </td>
+
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="btcusdt"></div>   </td>
+
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="busdidr"></div>   </td> 
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="usdtidr"></div>   </td>
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="usdcidr"></div>   </td>
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="hedgeidr"></div>   </td> 
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="btcidr"></div>   </td> 
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="bnbhedgeidr"></div>   </td> 
+<td     >   <div  class="saldo" style="height: 100%; width: 100%;"  id="bnbidr"></div>   </td> 
+
+
+ <td             >   <div   class="saldo" style="height: 100%; width: 100%;" id="coin"></div>   </td>
+  
+<td       colspan="4"   class="bg-white" >   <div   class="saldo" style="height: 100%; width: 100%;" id="dailyusdt"></div>   </td>
+ 
+ <td           width="10%  "      class="bg-white" >   <div   class="saldo" style="height: 100%; width: 100%;" id="lasttrade"></div>   </td>
+ 
+    <td  colspan="4"  ><div  class="saldo" style="height: 100%; width: 100%;" id="chartsal"> </div>  </td>  
+ 	 
+	    	 	  
+ <td  colspan="2"     width="15%"  > 
+  
+   <div class="chart-area"  id="chartaset"></div>  
+ </td> 
+  
+   
+    </tr>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+<tr    class="bg-white" >
+
+
+<td   >   <div  class="saldo" style="height: 100%; width: 100%;"  id="bnbchgl"></div>   </td> 
+
+
+  
+ <td    >   <div class="chart-area"  id="bnbhedgechg"></div>    </td> 
+ 
+   <td    >  <div class="chart-area"  id="btcchg"></div>    </td> 
+   
+  <td     colspan="2"   >   <div class="chart-area"  id="dailyxau"></div>    </td>  
+
+ 
+	<td     >    <div  class="saldo" style="height: 100%; width: 100%;"  id="hedgeidrx"></div>   </td>
+
+  <td     >   <div class="chart-area"  id="daily"></div>   </td> 
+  
+<td    >   <div  class="saldo" style="height: 100%; width: 100%;"  id="dailybnbhedge"></div>   </td>
+<td   >   <div class="chart-area"  id="dailybnb"></div>   </td>
+   
+<td        >   <div  class="saldo" style="height: 100%; width: 100%;"  id="ALLCHG"></div>   </td> 
+   <td      colspan="2"   >   <div class="chart-area"  id="chartcap"></div>    </td>  
+
+<td           width="15%  "     colspan="3"  >   <div  class="saldo" style="height: 100%; width: 100%;"  id="chartvirtual"></div>   </td>
+	 <td      colspan="2"      width="10%  ">  
+ 
+ 
+   <div class="  small text-success"  id="books"> </div> 
+      
+ 
+ 
+			 </td>	
+ <td     colspan="2"    width="5%"> 
+ 
+   <div class="chart-area small text-success"  id="bookb"> </div> 
+      
+  </td> 
+   <td    colspan="2"     > 
+ 
+ 
+  <div class=" small text-danger"  id="hist"> </div> 
+   
+ 
+ </td> 
+ 
+</tr>
+ 
+  <tr   > 
+  
+ 
+<td  colspan="3"    width="15%"   >
+ 
+<div class="chart-area"  id="historytradech"> </div>  
+  </td>	
+   <td   colspan="3"    width="15%"  >   <div class="chart-area"  id="chartodr"></div>   </td>
+
+  	  <td  colspan="2"        width="5%"  >  <div class="chart-area"  id="demo"></div> </td> 
+  	  <td  colspan="4"        width="5%" >  <div class="chart-area"  id="demo90"></div> </td>
+ 
+ 
+ 	    
+   	  
+ 
+    
+  
+ 
+     
+ 
+
+
+ 	 
+     <td     > 
+ 
+  <div id="SERATUS"></div> 
+  <div  id="LIMAPH"></div> 
+ 
+ <div id="LIMARATUS"></div> 
+ 
+ <div  id="SEPULUHK"></div> 
+ 
+ 
+ 
+ 
+ 
+   <div  id="BSEP"></div> 
+ 
+ <div id="BSER"></div> 
+ <div  id="BLIMAR"></div>  
+ 
+  </td>
+  
+
+    	    <td    colspan="2"     width="10%"   > <div class="chart-area"  id="chartsaldo"></div>   </td> 
+ 
+ <td   colspan="6" class="bg-white text-sm" >  
+
+  <div class=" card-scrollable   text-warnadark"> 
+<div class="card-body  ">
+<div class="chart-area"  id="chatroom"> </div> 
+
+</div>
+
+</div>
+   
+
+	 </td>
+ 
+ 
+
+  </tr>
+   
+  
+  
+  
+ 
+</tbody>
+</table> 
+	 
+    
+ 
+ 
+  
+   
+	
+      
+ 
+   	<script src="js/canvasjs.min.js"></script> 
+    <script src="js/hhmac-sha512.js"></script>
+    <script src="js/key.js"></script>
+
+    <script src="d3.js"></script>
+
+
+ 
+ 
+ 
+ <script>
+  
+  var va=0;
+  var dataPointsbtc=[];
+ var dataPointscap=[];
+ var dataPointsvir=[];
+  var dataPointscapvirtual=[];
+  var dataPointsorder=[];
+  var altc =0;
+  var dataPointsold=[];
+ 
+var nonce=Math.floor(Date.now() / 1000);
+ 
+ 	var dataPoints2=[];
+    	var dataPointschg=[];
+	var gold = 0;
+	var goldidr = 0;
+	var usdidr =0; 	
+  var a = new Date(nonce * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var unix =     + hour + ':' + min + ':' + sec ;
+   var dataPointsbuy=[];
+     var dataPointssell=[];
+ var hsaldo =0;
+ 
+ 
+  <?php
+ echo"var bookorderx= $jsonbook;";
+ ?>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  var cry = getCookie("pilih");
+   var cookievir = getCookie("virtual");
+ 
+  var cookiebalance = getCookie("balance");
+  var proxy = getCookie("proxy");
+  if (proxy==0){  document.getElementById("parameterp").innerHTML = "🟠 proxy <br>";}
+   if (proxy==1){  document.getElementById("parameterp").innerHTML = "🟢 proxy  <br>";}
+   
+  
+ if (cookiebalance==0){ 
+ 
+document.getElementById("ball").disabled = false;
+document.getElementById("balo").disabled = true;
+  //document.getElementById("parameter3").innerHTML  = "🟠 request realtime   offline<br>🟠 data balance use offline<br>🟠 data trade use offline<br>"; 
+ }
+
+if (cookiebalance==1){
+document.getElementById("ball").disabled = true;
+document.getElementById("balo").disabled = false;
+ //document.getElementById("parameter2").innerHTML  +=  "🟢 request realtime lastrade aktif<br>🟢 request  chart aktif<br>🟢 coockie balance aktif<br>"; 
+ 
+update();
+ 
+// var xmlhttpf = new XMLHttpRequest();
+// xmlhttpf.onreadystatechange = function(){
+  // if(xmlhttpf.status == 200 && xmlhttpf.readyState == 4){
+  
+	   //  localStorage.setItem('balance', data); 
+	// document.getElementById("alerthttp").innerHTML  =  " <div class=bg-info >http ok </div>";
+	 // console.log(data);
+	 
+	 
+	 
+ 
+	
+} 
+	
+	
+	
+		 
+ if ( cookievir == 1){	
+ 
+ 
+   var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+ 
+ db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  LOGS');
+ });
+ 
+  db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  bnbchg');
+ });
+ db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  bnbhedgechg');
+ });
+  db.transaction(function (tx) {
+tx.executeSql('DROP TABLE  btcchg');
+});
+ 
+ db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  ALLCHG');
+ });
+  db.transaction(function (tx) {
+  tx.executeSql('DROP TABLE  coin'+cry+'');
+  });
+    db.transaction(function (tx) {
+  tx.executeSql('DROP TABLE  databuysell');
+  });
+ db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  SALDO');
+ });
+
+
+
+
+
+  
+    db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  usdtlog');
+ });
+
+ db.transaction(function (tx) {
+ tx.executeSql('DROP TABLE  bnbhedgelog');
+ });
+  db.transaction(function (tx) {
+  tx.executeSql('DROP TABLE  btclog');
+  });
+db.transaction(function (tx) {
+tx.executeSql('DROP TABLE  bnblog');
+});
+db.transaction(function (tx) {
+   tx.executeSql('DROP TABLE  hedgelog');
+   });
+   db.transaction(function (tx) {
+   tx.executeSql('DROP TABLE  dolar');
+   });
+ 
+ db.transaction(function (tx) {
+  tx.executeSql('DROP TABLE  xaulog');
+});
+ 
+
+ }
+	
+	
+	
+	
+	
+	
+	
+	
+	// document.getElementById("parameter").innerHTML  +=  "🟠 chart using offline data<br>"; 
+	// document.getElementById("parameter").innerHTML  +=  "🟠 balance using offline data<br>"; 
+	
+ 	 	 
+// var post ='method=getInfo&nonce='+nonce;
+// var sha512screet = CryptoJS.HmacSHA512(post, screet);
+ 
+ // const uri = 'https://indodax.com/tapi/';
+ // let h = new Headers(); 
+ // h.append('Content-Type','application/x-www-form-urlencoded'); 
+// h.append('Sign', sha512screet)
+// h.append('Key', key) 
+// let req = new Request(uri, {
+    // method: 'POST',
+    // headers: h,
+    // body: post,
+// });
+// fetch(req)
+    // .then(
+    // function(response) {
+      // if (response.status !== 200) {
+        // console.log('error: ' +  response.status);
+        // return;
+      // }
+
+    
+      // response.text().then(function(data) {
+		  
+		  var xmlhttpf = new XMLHttpRequest();
+xmlhttpf.onreadystatechange = function(){
+  if(xmlhttpf.status == 200 && xmlhttpf.readyState == 4){
+  
+   myblnc = JSON.parse(xmlhttpf.responseText);  
+ 
+	  
+ 
+		 	//   myblnc = JSON.parse(data);
+		 
+ 
+  const text  = myblnc.return.balance;
+		var sidr=0;
+		var no=0;
+			var sep =0;
+		var totalaset=0;
+			var totalaseth=0;
+				var totalasetl=0;
+					var totalaset=0;
+		var totalasetv=0;			
+		var totalrat=0;	
+		var ratasal	 =0;
+		var ratk 	 =0;	
+	var ratk2 	 =0;			
+		var chg 	 =0;		
+		var chgh 	 =0;		
+		var chgl 	 =0;
+		var rat 	 =0;
+		var totalaset2=0;
+		var harga =0;
+		var hargah =0;
+		var hargal =0;
+		var hargabid =0;
+		var hargaask =0;
+		var totalvolume =0;
+		var vol =0;
+		var namaalt=0;
+		var volidr =0;
+		var husdt=0;
+		var lusdt=0;
+		var hbnb=0;
+		var lbnb=0;
+		var hbnbhedge=0;
+		var lbnbhedge=0;		
+		var hbtc=0;
+		var dblu=0;
+				var dblu2=0;
+		var lashedge=0;
+		var hhedge=0;
+		var lhedge=0;
+		var sbnb=0;
+		var bbnb=0;
+		var lastusdc=0;
+		var lastbusdidr=0;
+		var lastusdp=0;
+		var lbtc=0;		
+		var sbtc=0;
+		var bbtc=0;		
+		var susdt=0;
+		var busdt=0;		
+		var sbnb=0;
+		var bbnb=0;	
+		var sbnbhedge=0;
+		var bbnbhedge=0;		
+		var nombre=0;
+		var moo =0;
+		var linesal=0;
+		var totvir =0;
+		var lasbnb
+		var ma=0;
+	var totvirh =0;
+	var totvirl =0;
+	var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);   
+  var vob=0;
+  var totvol=0;
+ 
+// var xmlhttp = new XMLHttpRequest();
+// xmlhttp.onreadystatechange = function(){
+  // if(xmlhttp.status == 200 && xmlhttp.readyState == 4){
+  
+  
+  
+  
+  
+   <?php
+ echo"var summ= $json;";
+ ?>
+  
+  
+  
+  
+  
+  
+  
+  
+  // myObj = JSON.parse(xmlhttp.responseText);  
+   
+   
+ //localStorage.setItem('sumaries', xmlhttp.responseText); 
+	//  document.getElementById("parameter").innerHTML  +=' 🟢  data summaries live, <br>'  ; 
+  const dsum  = summ.tickers ;
+        
+  let ae = "";
+let be = "";
+    	 
+  
+for (const x in dsum) {
+
+   be += dsum[x] + ", ";
+   ae += x + ", ";
+ const name  = x ;  
+  const [alt,base] = x.split('_');
+  
+  
+  
+  const high  = dsum[x]["high"] ;
+const low  = dsum[x]["low"] ;
+const last  = dsum[x]["last"] ;
+const buy  = dsum[x]["buy"] ;
+const sell  = dsum[x]["sell"] ;  
+const volidr= dsum[x]["vol_idr"] ; 
+const vob=volidr;
+ 
+    var crp = alt+base;
+  
+  
+  
+  
+  
+  
+  if (base=="idr"){
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  vob.split('\n').forEach((pair) => {
+ 
+  
+			salt = pair;
+		 
+			totalvolume += salt;
+			
+			
+			
+			
+			
+			
+
+			
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+		)		 
+
+  var saldl =0;
+  var saldoh =0;
+ var saldo =0;
+  var saldov =0;
+let c = "";
+let d = "";
+ 
+for (const o in text) {
+   d += text[o] + ", ";
+   c += o + ", ";
+    const bname  = o ;  
+	const coin  = text[o] ;  
+	  if (bname=="idr"){
+	  
+	  
+	    
+
+	  //document.getElementById("saldoidr").innerHTML=coin; 
+sidr=coin;
+	  }
+	  
+	  
+	  
+	  
+	  
+	if (bname==alt){
+  //console.log( o  , text[o] );
+  no++;
+
+  saldo= buy * coin;
+  var koon=100000/last;
+    saldov= last *  koon ;
+	
+   saldoh= high * koon ;
+     saldol= low *  koon ;
+  max=0;
+  
+  var nonce=Math.floor(Date.now() / 1000);
+ 
+ 
+	  chg =(((last/low)*100)-100);
+	 chgg =(((last/high)*100)-100);
+   chgh =(((high/low)*100)-100); 
+ chghl =(((low/high)*100)-100);    
+ 
+ 
+ 	if ( crp == cry){
+         namaalt=alt+'_'+base;
+		 setCookiexxx("pilihalt",""+namaalt+"",7);
+		 
+		 
+		 if (cookiebalance==1){
+		 var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS coin'+cry+' (id unique, idr)');   
+ tx.executeSql('INSERT INTO coin'+cry+' (id, idr) VALUES ('+nonce+', '+coin+')');  
+ });  
+  
+ 
+ }
+ }
+   
+ 
+  
+ if (crp =="btcidr"){ 
+  hbtc =high;
+ lbtc=low;
+ sbtc=sell;
+ bbtc=buy;
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS btclog (id unique, idr)');   
+ tx.executeSql('INSERT INTO btclog (id, idr) VALUES ('+nonce+', '+last+')');  
+ });  
+  
+ 	  chgcv =(((last/low)*100)-100);
+	 chggcv =(((last/high)*100)-100);
+	 
+	 
+	 
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS btcchg (id unique, idr,idr2)');   
+ tx.executeSql('INSERT INTO btcchg (id, idr,idr2) VALUES ('+nonce+', '+chgcv+', '+chggcv+')');  
+ });  
+ }
+  
+ if (crp =="bnbhedgeidr"){ 
+ 
+  hbnbhedge =high;
+ lbnbhedge=low;
+ sbnbhedge=sell;
+ bbnbhedge=buy;
+ 
+ 	  chgb =(((last/low)*100)-100);
+	 chggb =(((last/high)*100)-100);
+	 
+	 
+	 
+   var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS bnbhedgechg (id unique, idr,idr2)');   
+ tx.executeSql('INSERT INTO bnbhedgechg (id, idr,idr2) VALUES ('+nonce+', '+chgb+', '+chggb+')');  
+ });  
+ 
+  
+  
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS bnbhedgelog (id unique, idr)');   
+ tx.executeSql('INSERT INTO bnbhedgelog (id, idr) VALUES ('+nonce+', '+last+')');  
+ });  
+  
+ }
+ 
+ 
+  if (crp =="hedgeidr"){ 
+ lashedge=last;
+ hhedge=high;
+  lhedge=low;
+ sbnb=sell;
+ bbnb=buy;
+
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS hedgelog (id unique, idr)');   
+ tx.executeSql('INSERT INTO hedgelog (id, idr) VALUES ('+nonce+', '+last+')');  
+ });  
+  
+ }
+ 	 
+ 
+   if (crp =="busdidr"){ lastbusdidr = last; }
+ 
+  if (crp =="usdcidr"){ lastusdc = last; }
+   if (crp =="usdpidr"){ lastusdp = last; }
+ 
+ if (crp =="usdtidr" ){ 
+ 
+ husdt =high;
+ lusdt=low;
+ susdt=sell;
+ busdt=buy;
+  
+ 
+ //alert(lastusdc);
+ 
+ 
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ if  (dolark > 1  && dolar > 1){
+ tx.executeSql('CREATE TABLE IF NOT EXISTS usdtlog (id unique, idr,idr2,idr3,idr4,idr5,idr6)');   
+ tx.executeSql('INSERT INTO usdtlog (id, idr,idr2, idr3,idr4,idr5,idr6) VALUES ('+nonce+', '+last+', '+dolark+', '+dolar+', '+lastbusdidr+', '+lastusdc+', '+lastusdp+')')  ;  
+ }
+ 
+ });  
+ } 
+ 
+ 
+ 
+ if (crp =="bnbidr"){ 
+ hbnb=high;
+ lbnb=low;
+ sbnb=sell;
+ bbnb=buy;
+ 
+  
+ 	  chgbl =(((last/low)*100)-100);
+	 chggbl =(((last/high)*100)-100);
+	 
+	 
+	 
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS bnblog (id unique, idr)');   
+ tx.executeSql('INSERT INTO bnblog (id, idr) VALUES ('+nonce+', '+last+')');  
+ });  
+  
+  
+  
+  
+  
+   var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS bnbchg  (id unique, idr,idr2)');   
+ tx.executeSql('INSERT INTO bnbchg  (id, idr,idr2) VALUES ('+nonce+', '+chgbl+', '+chggbl+')');  
+ });  
+  
+  
+ }
+ 
+  
+  
+  	var color ="black";
+	
+ 
+ 
+ 
+ if ( alt    ){
+	  
+ 
+   ratk +=chg;
+   ratk2 +=chgg;
+ 
+  
+ 
+ 	totvir += chg; 	 
+	totvirh += chgh; 	
+	totvirl += chghl; 	
+ 
+	
+    
+    // chgl =(((low/xx)*100)-100);
+	
+	var opp= chgh - chg;
+		var lpp= chghl - chgg;
+		// var cx ="#A0A0A0";
+  	var wrn="#A0A0A0";
+	var wrnl="#A0A0A0";
+	if (opp < 1.5){ wrn ="black";
+	
+	dblu += chg;
+	// document.getElementById("parameter2").innerHTML  +='<a class=text-danger>'+alt+'</a>, '  ;  
+	 }
+	if (lpp > -1.5){ wrnl ="black";
+	 // document.getElementById("parameter2").innerHTML  +='<a class=text-primary>'+alt+'</a>, '  ;  
+	  	dblu2 += chgg;
+	
+	}
+		//if (saldo > 5000 &&  saldo < 20000 ){ wrn ="#E8E9ED";}
+		
+  
+
+			//if (saldo > 50000   ){ wrn ="gray";}
+  moo++;
+ 
+     if (crp == cry ){nombre=moo}
+	 
+	 if (  chgh < 200 || saldo > 10000 ){ 
+	  var si=5;
+	 
+	    if (crp == cry ){si=15; 
+		 
+		
+		}
+ dataPointsvir.push( 
+// { x: no, y:chghl,toolTipContent: alt  +'  '+ high,color:"black",markerSize:3,click: onClick, link:alt } ,
+// { x: moo, y:chgh,toolTipContent: alt  +'  '+ high,color:"black",markerSize:3,click: onClick, link:alt } ,
+ { x: moo, y:chg,toolTipContent: alt  +'  '+ last,color:wrn,markerSize:si, click: onClick, link:alt },
+ { x: moo, y:chgg,toolTipContent: alt  +'  '+ last,indexLabelFontSize:8,color:wrnl,markerSize:si, click: onClick, link:alt },  ); 
+	 
+	 }
+  
+  }
+	 
+  //#########################################//
+  
+ <!-- if (vir ==1){ -->
+  <!-- setCookie("vir"+alt+"","100",7); -->
+<!-- } -->
+ 
+  
+  
+  		if ( crp == cry){
+		
+		altc=alt ;
+		harga = last;
+		hargah = high;
+		hargal = low;
+		hargabid = buy;
+		hargaask = sell;
+		namaalt=alt+'_'+base;
+		 var sep = (10200/ buy); 
+		
+	var nokom=	(Math.round(saldo));
+	  
+	     var seratus = ((coin * buy)- 10) /buy  ;  
+		 var sepuluh = ((50/100)*seratus) ;   
+		 
+				var sellimart=  514514;  
+				var totsel= sellimart /buy ; 
+				
+		//var buylimart= 500000-saldo; 
+			var buylimart= 500000;
+  			//document.getElementById("nopsimple").innerHTML += ' <td  >Saham </td> <td  > '+ alt + '   </td></tr><tr > <td  >High </td><td> '+ high + '</td></tr><tr> <td  > Last  </td><td>  '+last+'</td></tr><tr> <tr > <td  >Low </td><td> '+ low + '</td></tr><td >Aset rp </td><td>  '+nokom+' </td> </tr> </tr>   ';
+ 
+  		// document.getElementById("nop").innerHTML += '<tr   class= '+bgg+'><td>'+no+'</td><td  >'+ alt + '</td><td  > '+text[o]+'</td><td  >max '+xx+'</td><td  >chg '+chg+'</td><td  > '+last+'</td><td >'+saldo+' </td> <td><button type="button" class="btn btn-primary btn-sm col-xl-2"  style="height:100%;   width: 100%; " onclick=Rorder(piro="pair='+alt+'_idr&type=buy&idr=11000&price=100000000000")> B</button "> </td><td><button type="button" class="btn btn-danger btn-sm"  style="height:100%;   width: 100%; " onclick=Rorder(piro="pair='+alt+'_idr&type=sell&order='+coin+'&price=1")>S</button "> </td> </tr>';
+
+   var csel = getCookie("sel");
+   var cbuy = getCookie("buy");
+  
+ document.getElementById("SEPULUHK").innerHTML  =  '  <button  class="button"  onclick=Rorder(piro="pair='+alt+'_idr&type=sell&'+alt+'='+sep+'&price='+low+'")>  Sell 10K</button > ';
+  
+    
+ document.getElementById("LIMARATUS").innerHTML  =  ' <button    class="button" onclick=Rorder(piro="pair='+alt+'_idr&type=sell&'+alt+'='+totsel+'&price='+low+'")> SELL 500K</button >';  
+ 
+ 
+ document.getElementById("LIMAPH").innerHTML   = ' <button    class="button"  onclick=Rorder(piro="pair='+alt+'_idr&type=sell&'+alt+'='+sepuluh+'&price='+low+'")> SELL 50 %</button >';  
+	 
+ 
+ document.getElementById("SERATUS").innerHTML  = '  <button   class="button"  onclick=Rorder(piro="pair='+alt+'_idr&type=sell&'+alt+'='+seratus+'&price='+low+'")> SELL 100%</button > ';  
+	   
+
+ 
+document.getElementById("BSEP").innerHTML  =  '<a type="button" class="btn  btn-success btn-sm col-xl-2"  style="  width: 100%; " onclick=Rorder(piro="pair='+alt+'_idr&type=buy&idr=10130&price=100000000000")> '+ alt + ' B 10K</a >   '; 
+ 
+document.getElementById("BSER").innerHTML  =  '   <a type="button" class="btn  btn-success btn-sm col-xl-2"  style=" width: 100%; " onclick=Rorder(piro="pair='+alt+'_idr&type=buy&idr=100000&price=100000000000")> '+ alt + ' B 100K</a >  '; 
+ 
+   //if (cbuy < -4 ){ 
+ document.getElementById("BLIMAR").innerHTML  =  '   <a type="button" class="btn  btn-success btn-sm col-xl-2"  style="   width: 100%; " onclick=Rorder(piro="pair='+alt+'_idr&type=buy&idr=1000000&price=100000000000")> '+ alt + ' B 1000000 </a >     '; 
+//}
+
+		}
+   
+	
+	if ( chg <  200){
+	size=1;
+	if (saldo > 5000){size=6}
+	var crp = alt+base;
+	var color ="black";
+	
+ 	  if (chg >=100 ){
+  //	document.getElementById("chat3").innerHTML += alt+' , ';
+ }
+	
+	
+	if (saldo > 5000 ){color ="black";}
+		
+		if (crp == cry ){color ="#A0A0A0";}
+	
+	 
+ 
+	
+//dataPointschg.push({ x: no, y:chgh,toolTipContent: alt + '        '+chgh  ,color:"black"  ,markerColor:"gray",markerSize:3,click: onClick, link:alt },{ x: no, y:chg,toolTipContent: alt + '        '+chg    ,markerColor:color,color:"#A0A0A0",markerSize:5,click: onClick, link:alt } ,{ x: no, y:chgl,toolTipContent: alt + '        '+chgl ,color:"cyan"   ,markerColor:"gray",markerSize:5,click: onClick, link:alt }, );
+ 
+  
+	}	
+	 totalaseth+=saldoh;
+	  totalasetl+=saldol;
+  totalasetv+=saldov;
+ totalaset+=saldo;
+ if (saldo < 500){
+  ratasal +=saldo;
+	
+
+}	
+
+
+ 
+
+
+ <!-- if (saldo > hsaldo){  -->
+
+ <!-- localStorage.setItem('aset_'+crp, saldo);       -->
+
+ <!-- } -->
+ 
+ 
+ //localStorage.setItem('aset_'+crp, saldo); 
+ var hsaldo = localStorage.getItem("aset_"+crp+"");
+ 
+ var rx = /busd|usdt|usdc|dai|usdp|btc|lgold|dgx|eurs|btc|hedg|hedge|xrp|xlm/;
+ 
+ var nmm="k";
+ //if ( alt.match(rx)) {   
+  
+ if (saldo > 10000  ){
+	 var markc =4;
+	 var wern='pink';
+	 if (saldo > 500000){ wern='black'; markc="5";}
+	  if (saldo > 510000){ wern='black'; markc="10";}
+	   if (saldo < 490000){ wern='orange'; markc="5";}
+	   
+	  
+ var clrm="#E8E9ED";
+ if ( alt.match(rx)) { clrm="black";}
+  if ( alt.match("btc|trx|bnb|eth")) { clrm="#A0A0A0";}
+  
+  var tpp= saldo - saldol ;
+    var pe   = Math.floor(tpp); 
+	dataPointssell.push( { x:ma,y:5000000,click: onClick, link:alt, },);
+		dataPointsbuy.push( { x:ma,y:4500000,click: onClick, link:alt, },);
+	
+	
+	
+ 
+	//if ( crp.match("btcidr|bnbidr|bnbhedgeidr|hedgeidr|aoa|usdt")) {
+		  ma++;
+		  	 if ( crp == cry){ linesal=ma;}
+dataPoints2.push(  
+{x:ma,  y: saldoh, indexLabel:alt,  indexLabelFontSize:15, markerSize:markc,color:"black",click: onClick, link:alt,   exploded: false }  ,
+
+{x:ma,  y: saldo,  toolTipContent: alt+' = tp'+ tpp ,   markerSize:markc,color:"cyan",click: onClick, link:alt,   exploded: false }  ,
+
+{x:ma,  y: saldol, toolTipContent: alt+' = tp'+ tpp ,    markerSize:markc,color:"gray",click: onClick, link:alt,   exploded: false }  ,
+{x:ma,  y: -500000,  toolTipContent: alt+''+ saldo ,   markerSize:markc,color:clrm,click: onClick, link:alt,   exploded: false }  ,
+
+
+  );
+	//}
+ 
+ }
+ 
+ 
+ 
+	
+   //console.log( alt, base ,last,high ,low,volidr );
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  } 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
+  
+  
+  
+  
+  	}
+
+ 
+}
+
+ 
+
+
+   var inpo = '';
+ if (crp == cry ){ inpo = "true";
+ 
+ 
+ }
+var nid = ma+1;
+ dataPoints2.push(  { x:nid, y: sidr,toolTipContent: '  idr    '+sidr ,name: "idr" ,  markerSize:4 ,color:"gray"  },  { x:nid, y: -500000,toolTipContent: '  idr    '+sidr ,name: "idr" ,  markerSize:4 ,color:"black"  },   );
+  
+
+ 
+  <!-- if (salt > 0){ -->
+   <!-- var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);   -->
+  
+<!-- db.transaction(function (tx) {  -->
+   <!-- tx.executeSql('CREATE TABLE IF NOT EXISTS VOL (id unique, idr)');  -->
+   <!-- tx.executeSql('INSERT INTO VOL (id, idr) VALUES ('+nonce+', '+salt+')');   -->
+<!-- });  -->
+
+<!-- } -->
+
+ 
+
+
+
+
+
+  totalcap=ratasal/no;
+  totalrat=ratk/no;
+    totalrat2=ratk2/no;
+  datablack=dblu/no;
+    datablack2=dblu2/no;
+  //alert (datablack2);
+   
+     
+  if (datablack2 < -3){
+  
+        var snd = new Audio('sounds/bell_ring.mp3');
+ snd.play(); snd.play(); snd.play(); snd.play();
+     
+  }
+  
+     
+  if (datablack2 > 3){
+  
+        var snd = new Audio('sounds/bell_ring.mp3');
+       snd.play(); snd.play(); snd.play(); snd.play();
+  
+     
+  }
+  
+  
+  
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+  
+  db.transaction(function (tx) {  
+  tx.executeSql('CREATE TABLE IF NOT EXISTS ALLCHG (id unique, idr)');   
+  tx.executeSql('INSERT INTO ALLCHG (id, idr) VALUES ('+nonce+', '+ratk+')');  
+  });  
+  
+  
+  
+  
+  
+  
+  
+  
+   // document.getElementById("parameter").innerHTML  +=  ratk+'<br>'; 
+  //document.getElementById("totalaset").innerHTML=totalaset; 
+ // document.getElementById("cap").innerHTML=totalcap +"  %"; 
+ //  document.getElementById("cap2").innerHTML=totalrat;
+ 
+ 
+ 
+ 
+   //console.log(totalrat);
+   document.title = sidr +' | ' +totalaset ;
+   var ratatotvir = totvir / no;
+    var ratatotvirh = totvirh / no;
+    var ratatotvirl = totvirl / no;
+   
+    
+ var  dataPointsast=[];
+   
+    dataPointsast.push(  { y: sidr,name: "free" , color:'green' } , { y:totalaset,name: "invest" , color:'pink' } ,   );
+
+ 
+var data = [];
+ 
+		 
+
+		var dataSeries = {type: "pie" ,indexLabel: "{name}", indexLabelFontSize: 12,  showInLegend: false,  legendText:"order book", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("chartaset", {
+ backgroundColor: "transparent ",
+    title:{
+    text: "BALANCE",
+    verticalAlign: "center",
+    dockInsidePlotArea: true,
+    fontColor: "#ff6384",
+    fontSize: 20,
+    fontFamily: "arial"
+  },
+		axisX:{   
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+ gridThickness:    0.5    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		
+ 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsast ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+ 
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  // console.log(ratatotvir);
+   
+    if (totalaset > 0){
+   var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+  
+  var semua=totalaset + sidr;
+   var semuah=totalaseth  ; 
+   var semual=totalasetl  ; 
+  var semuav=totalasetv  ; 
+db.transaction(function (tx) { 
+   tx.executeSql('CREATE TABLE IF NOT EXISTS SALDO (id unique, idr,idr2, id3,idr4)'); 
+   tx.executeSql('INSERT INTO SALDO (id, idr,idr2, id3,idr4) VALUES ('+nonce+', '+semua+', '+semuav+', '+semuah+', '+semual+')');  
+}); 
+
+}
+
+   
+   
+  va  = totalrat;
+ // console.log(va );
+  if (va > 0){
+  var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+  
+  
+  
+db.transaction(function (tx) { 
+   tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log,log2)'); 
+   tx.executeSql('INSERT INTO LOGS (id, log,log2) VALUES ('+nonce+', '+va+', '+totalrat2+')');  
+}); 
+
+ 
+
+var maxh=0;
+var minh=100;		 
+
+db.transaction(function (tx) { 
+
+var lascap2=0;
+var lascap=0;
+            tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) { 
+               var len = results.rows.length, i; 
+                 
+               for (i = 0; i < len; i++) { 
+			  lascap2=results.rows.item(i).log2;
+			   lascap=results.rows.item(i).log;
+			   if (i  > 0 && len >  0 ){
+ 	   
+			   
+			   
+			   
+			   
+			   
+			   
+ dataPointscap.push({ x: i, y:results.rows.item(i).log,lineThickness:0.1,markerSize:2, }, 
+				 { x: i, y:results.rows.item(i).log2,lineThickness:0.1,markerSize:2, },  );
+		if (lascap >= maxh){ maxh= lascap};	  
+if ( lascap <= minh ){ minh= lascap};	  		
+                 // msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+				  
+				  
+				  
+				  
+				  
+				  }
+				  
+                 // document.querySelector('#status').innerHTML +=  msg; 
+               } 
+			   
+	var kooo= i +20;
+
+ 
+ 
+ 
+ ////////////////////////////////////////
+         var dataPointstengah =[];
+		         var dataPointssep =[];
+				         var dataPointsmsep =[];
+        var dataPointsfib =[];
+	    var dataPointssal=[];
+	  var maxsal=0;
+	  var chasal =0;
+	  	  var maxsalk=0;
+	  var minsal=100000000000000000000000000000000;
+         var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+         var msg; 
+               var lassal=0; 
+
+ var lassalh=0;
+  var lassall=0;
+ var lassalv=0;
+  var lassalho=0;
+         db.transaction(function (tx) { 
+ 
+
+			var	  maxsal =   getCookie("maxsal");
+			var	  minsal =   getCookie("minsal");
+ 
+			
+		   
+            tx.executeSql('SELECT * FROM SALDO', [], function (tx, results) { 
+               var lensb = results.rows.length, i; 
+               
+			   //alert (lens);
+			   var nopse=lensb;
+			  -->
+				 
+				 
+               for (i = 0; i < lensb; i++) { 
+			   
+			  
+			   
+			    
+				 
+				 
+		 
+			    if (lassal  >= maxsal){ 
+						    setCookiexxx("maxsal",lassal,7);
+							maxsalk=lassal;
+					 }
+										
+										
+				  if (lassal  <= minsal){
+				    setCookiexxx("minsal",lassal,7);
+				             }
+				  var clo="#E8E9ED";
+
+					lassal=results.rows.item(i).idr;
+					lassalv=results.rows.item(i).idr2;
+					lassalh=results.rows.item(i).id3;
+					lassall=results.rows.item(i).idr4;
+			 chasal =lassalv  - lassall;
+			var  chasal2 =lassalh  - lassall;
+			     dataPointssal.push(
+				                    // { x: i, y:results.rows.item(i).idr ,color:"red" },
+									 { x: i, y:results.rows.item(i).idr2  ,color:"red" },	
+                                      { x: i, y:results.rows.item(i).id3  ,color:"blue" },									 
+									 { x: i, y:results.rows.item(i).idr4  ,color:"orange" } 
+                                    );
+			   
+               
+			    dataPointsfib.push( { x: i, y:results.rows.item(i).idr2 ,color:"red" }, { x: i, y:results.rows.item(i).idr4  ,color:"orange" }  ,);  
+			  
+			   dataPointsmsep.push( { x: i, y:results.rows.item(i).idr ,color:"red" }, { x: i, y:results.rows.item(i).idr4  ,color:"orange" }  ,);  
+			   dataPointstengah.push( { x: i, y:chasal ,color:"blue" }, );  
+			   
+			   
+			   
+			   }
+ //setCookie("maxsal",21000000 ,7);
+		// setCookie("minsal",10000000,7);
+				
+				
+				   
+		  
+			var teng= i * 1.5;
+			var mako= i *2;
+         var inb=i * 1.1;		
+		  var inb2=i * 1.2;	
+		//jangan diganti	
+/////////////////////////////////////////////////////////		
+			var minsal2 = (minsal -(maxsal-minsal));   
+			var maxsal2 =  maxsal +  2000000 ;  
+			var rekomenidr =  lassal-minsal2   ;    
+ ////////////////////////////////////////////////////////
+			var exc =rekomenidr - sidr ;
+			    exc = Math.floor(exc);	
+			var ipo ="tunggu"  ;		 
+		 
+		 //altc=alt ;
+		<!-- harga = last; -->
+		<!-- hargah = high; -->
+		<!-- hargal = low; -->
+		<!-- hargabid = buy; -->
+		<!-- hargaask = sell; -->
+		<!-- namaalt=alt+'_'+base; -->
+		
+
+		var perask= ((hargaask/harga)*100)-100;
+
+		var perask2=( (perask *harga) + lassal);
+
+
+		var perbid= ((harga / hargabid )*100)-100;
+
+		var perbid2=(lassal - (perbid *harga)  );
+
+//alert(lassalh);
+var ipo="x";
+		//alert(perbid2);
+		var saab=0;	 
+		var kelir ="black"  ;	
+		var jmljual = exc / hargabid ;
+		var wcol ="red";
+		if (sidr < rekomenidr ){	   saab = "pair="+altc+"_idr&type=sell&"+altc+"="+jmljual+"&price="+hargal+"";
+			if (exc > 10000 ){
+		ipo = " sell "+exc;
+			}
+		kelir ="red" 
+		}
+
+		if (sidr > rekomenidr ){	
+		var exc =  sidr - rekomenidr   ;
+		exc = Math.floor(exc);	
+		wcol ="blue";
+		saab =  "pair="+altc+"_idr&type=buy&idr="+exc+"&price="+hargah+"";
+		if (exc > 10000 ){
+		ipo ="buy "+exc;
+		}
+		kelir ="blue" 
+		}
+var minsaly=lassal -1500000;
+		//dataPointsfib.push( { x:teng , y:  minsaly ,toolTipContent:ipo,indexLabel:ipo,indexLabelFontSize:20,indexLabelFontColor: wcol, markerSize: 5,markerColor:wcol,click: onClick, link:saab  } , );  
+ 
+
+ 
+		 var minsaldo =lassal - ((10/100)*lassal);
+         var maxsaldo =lassal  + ((10/100)*lassal);
+		 
+		 
+		 
+		  var minsaldo2 =harga - ((10/100)*harga);
+         var maxsaldo2 =harga  + ((10/100)*harga);
+		 
+		 
+		    
+
+		 
+		 
+		 
+		 
+ 
+		 
+		//dataPointsmsep.push( { x:0 , y:  maxsaldo  } ,  { x:mako , y:  minsaldo  } ,);  
+ 
+		 
+		 
+		 
+	 	 var interpal=((2.5/100)*lassal);
+		 
+		 var perck =((lassal/minsal)*100)-100;
+				perck = Math.floor(perck);	 
+		 var data = [];
+ //var maxsal2 = (0.03 * maxsal )+ maxsal ;
+		 var bm= i + 2000;
+var maku =lassal * 2 ;
+///,axisYType: "secondary",
+	var dataSeriest = {type: "line" , lineThickness: 4 ,color:"black" ,showOnTop:true ,showInLegend: false ,axisYType: "secondary",} ;
+	var dataSeriesm = {type: "line" , lineThickness:0.1 ,color:"red" ,showOnTop:true,showInLegend: false,} ;
+		
+		var dataSeries = {type: "line" , lineThickness: 0.1 , color:"gray" ,showInLegend: false,showOnTop:true,} ;
+		var dataSeriesx = {type: "line" , lineThickness:0.1 ,color:"green" ,showInLegend: false,} ;
+		var hlasal= hargah * lassal;
+		var llasal= hargal * lassal;
+		
+	 
+		
+		
+var pemb = Math.floor(lassal);	
+  var thb = pemb.toLocaleString();	
+  var pembsisa = Math.floor(rekomenidr);	
+<!-- console.log(dataSeries); -->
+ // document.getElementById("asetku").innerHTML  = pemb; 
+
+	var chart = new CanvasJS.Chart("chartsal", {
+			 
+ backgroundColor: "transparent ",
+       title:{
+		  
+     // text: "   "+cry    , fontSize: 30, 
+  fontColor: "#F5BA63",       
+	    //aset nilai saldoku // balance
+      },
+		axisX:{   maximum:mako,interval:10000,
+gridThickness:  0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			   
+		},
+	axisY:[{ 
+ // minimum:lassall, maximum:lassalh ,interval:interpal,
+		//title: "interval 1 percent",titleFontSize: 20,titleFontColor: "red",
+	//interlacedColor: "Azure",
+  stripLines: [ 
+   // {
+            // startValue:  perask2 , 
+ 
+            // endValue:  perbid2 , 
+         
+			// color:"yellow",
+			// thickness:1,
+			// showOnTop:true,
+			// labelFontSize:26,
+ 
+ 
+			 
+        // }  ,
+		
+		{
+			 
+			 value:  lassal  , 
+           label: pemb  ,
+			color:"red",
+			thickness:1,
+			showOnTop:true,
+			labelFontSize:16,
+  labelFontColor:"black",
+ 
+			 
+        }  ,
+		 {
+			 
+			  endValue:  lassal  , 
+            startValue:  lassall , 
+          // label: pemb  ,
+			color:"yellow",
+			thickness:1,
+			showOnTop:false,
+			labelFontSize:16,
+  labelFontColor:"black",
+ 
+			 
+        }  ,
+		{
+            value:  lassalv , 
+           // label: lassalv,
+			color:"black",
+			thickness:1,
+			showOnTop:true,
+			labelFontSize:16,
+  labelFontColor:"red",
+ 
+			 
+        }  ,
+		{
+            value:  lassall , 
+           //label: +lassalh,
+			color:"blue",
+			thickness:1,
+			showOnTop:true,
+			labelFontSize:16,
+  labelFontColor:"red",
+ 
+			 
+        }    ,
+		{
+            value:  lassalh , 
+           //label: +lassalh,
+			color:"blue",
+			thickness:1,
+			showOnTop:true,
+			labelFontSize:16,
+  labelFontColor:"red",
+ 
+			 
+        }  
+		// ,{
+            // value:  maxsal , 
+           
+			// thickness: 5,
+			// showOnTop:true,
+			// labelFontSize:15,
+ 
+ 
+			 
+        // }  ,{
+            // value:  minsal , 
+           
+			// thickness: 5,
+			// showOnTop:true,
+			// labelFontSize:15,
+ 
+ 
+			 
+        // }  
+        ], 
+		// <!-- labelFormatter: function(){ -->
+	// <!-- return " "; -->
+// <!-- },  -->
+labelFormatter: function(){
+	return " ";
+}, 
+ gridThickness:    0    , tickLength:  0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "orange"
+	}],
+	axisY2: {
+	 	  maximum:2000000,minimum: 0,interval:500000,
+ stripLines: [ 
+ {
+            value:  chasal , 
+           label: +chasal,
+			color:"blue",
+			thickness:5,
+			showOnTop:true,
+			labelFontSize:16,
+  labelFontColor:"cyan",
+ 
+			 
+        }  
+   // {
+            // value:  harga , 
+  
+			// color:"black",
+			// thickness:0.1,
+			// showOnTop:true,
+ 
+ 
+ 
+			 
+        // } ,
+// {
+            // startValue:  +harga , 
+            // endValue:+hargal,
+			// color:"pink",
+			 
+			 
+        // } ,
+// {
+            // startValue:  +harga , 
+            // endValue:+hargah,
+			// color:"#E8E9ED",
+			 
+			 
+        // } 
+ 
+ 
+
+		],
+	 gridThickness:    1    , tickLength: 0,
+lineThickness: 1,labelFontSize: 15, 
+  labelFontColor: "orange",
+	// labelFormatter: function(){
+	// return " ";
+// }, 
+	
+	},
+	 
+ 
+	legend: {
+		cursor: "pointer",
+		itemclick: toggleDataSeries
+	},
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointssal  ;
+	dataSeriesx.dataPoints = dataPointsfib  ;
+	dataSeriesm.dataPoints = dataPointsmsep  ;
+	dataSeriest.dataPoints = dataPointstengah ;
+	data.push(dataSeriesm,dataSeriest,dataSeries,dataSeriesx  );
+	 
+	
+	chart.render();
+	function toggleDataSeries(e) {
+	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	e.chart.render();
+}
+	
+	
+var fluk = lassal / harga;	
+	
+	 ///////////////////////////
+
+var  dataPointscoin=[];
+db.transaction(function (tx) { 
+var mab=0;
+var mib=10000000000000000000000000;
+
+var lashcoin=0;
+            tx.executeSql('SELECT * FROM coin'+cry+' ', [], function (tx, results) { 
+               var lenbzd = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbzd; i++) { 
+			 
+			   lashcoin=results.rows.item(i).idr;
+			   if (i  > 0 && lenbzd >  0 ){
+			   
+			     if (  lashcoin > mab   ){ mab=lashcoin;}
+				 if (  lashcoin  < mib ){ mib=lashcoin;}
+				 
+			     dataPointscoin.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+		var mab2=lashcoin + ((30/100)* lashcoin);	
+        var mib2=lashcoin - ((30/100)* lashcoin);				
+ 
+ //alert(fluk);
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line", color:"black" , indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:'', indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("coin", {
+ backgroundColor: "transparent ",
+     title:{
+		 fontColor: "#F5BA63", 
+    //   text: "total coin"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+ minimum:mib2, maximum:fluk,
+ stripLines: [ 
+		 {
+	 
+         value:lashcoin,
+           label:+lashcoin,
+			color:"red",
+        },
+		
+		 {
+	 
+         value:fluk ,
+         label:+fluk,
+			color:"black",
+        },
+		
+		],
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointscoin  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  function onClick(e) {
+	
+	Rorder(piro=saab);
+		 
+	}
+ 
+	 
+			   
+            }, null); 
+         }); 
+		 
+		 
+		 
+		
+
+
+
+
+
+
+
+
+ 
+ ///////////////////////////////////
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" , color:"black",lineThickness:0.01, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("chartcap", {
+ backgroundColor: "transparent ",
+        title:{
+			fontColor: "#F5BA63", 
+      // text: "market cap"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{   maximum:25,minimum:-25, 
+ stripLines: [ 
+		 {
+            startValue:  lascap ,
+            endValue: 0  ,
+			color:"red",
+			//showOnTop:true,
+        }  
+		
+		
+		,{
+            startValue:   lascap2 ,
+           endValue: 0  ,
+			color:"green",
+			//showOnTop:true,
+        }  
+		,{
+            value:   lascap2 ,
+          // endValue: 0  ,
+			color:"black",
+			 showOnTop:true,
+        }  
+		,{
+            value:   lascap  ,
+          // endValue: 0  ,
+			color:"black",
+			 showOnTop:true,
+        }
+		,
+		 {
+            startValue: 1 ,
+			endValue:-2, 
+			color:"orange",
+			showOnTop:true,
+        }  
+        ],
+ gridThickness:    0     , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointscap  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ///////////////////////////
+
+
+db.transaction(function (tx) { 
+
+
+var lasbtc=0;
+            tx.executeSql('SELECT * FROM btclog', [], function (tx, results) { 
+               var lenb = results.rows.length, i; 
+                 
+               for (i = 0; i < lenb; i++) { 
+			 
+			   lasbtc=results.rows.item(i).idr;
+			   if (lasbtc  > 0 && len >  0 ){
+			     dataPointsbtc.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksd = lasbtc + ((10/100)*lasbtc);
+		 
+  var minsd = lasbtc-((10/100)*lasbtc);
+		 	 
+ var inter =((0.8/100)*lasbtc);
+ 
+ 
+ 
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" , color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:+lasbtc, indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("daily", {
+ backgroundColor: "transparent ",
+     title:{
+		 fontColor: "#F5BA63", 
+       text: "btc"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	//maximum:hbtc,minimum:lbtc,interval:inter,
+ stripLines: [ 
+		 {
+			 
+			 startValue:+lbtc,
+            endValue:+lasbtc,  
+           // value:lasbtc,
+           
+			color:"#A0A0A0",
+        },
+			 {
+			 
+			 startValue:+lasbtc,
+            endValue:+hbtc,  
+           
+			color:"#E8E9ED",
+        },
+		
+		{
+            value:hbtc,
+            label: "   "  ,
+			color:"#A0A0A0",
+        },{
+            value:lbtc,
+            label: "   "  ,
+			color:"#A0A0A0",
+        }  ,  {
+            startValue:+sbtc,
+            endValue: +bbtc ,
+			color:"orange",
+        }  ,
+        ], 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbtc  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+ ///////////////////////////
+
+var  dataPointsbnb=[];
+db.transaction(function (tx) { 
+
+
+var lashedge=0;
+            tx.executeSql('SELECT * FROM hedgelog', [], function (tx, results) { 
+               var lenbz = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbz; i++) { 
+			 
+			   lashedge=results.rows.item(i).idr;
+			   if (lashedge  > 0 && lenbz >  0 ){
+			     dataPointsbnb.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksd = lashedge + ((20/100)*lashedge);
+		 
+  var minsd = lashedge-((20/100)*lashedge);
+		 	 
+ var inter =((0.8/100)*lashedge);
+ 
+ 
+ 
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line", color:"black" , indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:'', indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("hedgeidrx", {
+ backgroundColor: "transparent ",
+     title:{
+		 fontColor: "#F5BA63", 
+       text: "hedge"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	//maximum:hhedge,minimum:lhedge,interval:inter,
+ stripLines: [ 
+		 {
+			 
+			 startValue:+lhedge,
+            endValue:+lashedge,  
+           // value:lasbtc,
+           
+			color:"#A0A0A0",
+        },
+			 {
+			 
+			 startValue:+lashedge,
+            endValue:+hhedge,  
+           
+			color:"#E8E9ED",
+        },
+		
+		{
+            value:hhedge,
+            label: "   "  ,
+			color:"#A0A0A0",
+        },{
+            value:lhedge,
+            label: "   "  ,
+			color:"#A0A0A0",
+        }  ,  {
+            startValue:+sbnb,
+            endValue: +bbnb ,
+			color:"orange",
+        }  ,
+        ], 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbnb  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+ 
+
+ 
+ ///////////////////////////
+
+var dataPointsbtcchg=[];
+db.transaction(function (tx) { 
+
+var lasbtcchgg=0;
+var lasbtcchg=0;
+            tx.executeSql('SELECT * FROM btcchg', [], function (tx, results) { 
+               var lenbz = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbz; i++) { 
+			  lasbtcchgg=results.rows.item(i).idr2;
+			   lasbtcchg=results.rows.item(i).idr;
+			   if (lasbtcchg  > 0 && len >  0 ){
+			     dataPointsbtcchg.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },{ x: i, y:results.rows.item(i).idr2,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksdchg = lasbtcchg + ((3/100)*lasbtcchg);
+		 
+  var minsdchg = lasbtcchg-((3/100)*lasbtcchg);
+		 	 
+ var inter =((0.8/100)*lasbtcchg);
+ 
+ 
+ var mek= i + 100;
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" ,lineThickness:0.1, color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"BTC ", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("btcchg", {
+ backgroundColor: "transparent ",
+         title:{
+		 fontColor: "#F5BA63", 
+       text: "daily  btc"   ,  
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+ 	 maximum:25,minimum:-25,interval:15,
+ stripLines: [ 
+		 {
+            startValue:lasbtcchg,
+            endValue: 0  ,
+			color:"red",
+			  
+        }  ,{
+            startValue:lasbtcchgg,
+        endValue: 0  ,
+			color:"green",
+        }  ,{
+            value:lasbtcchgg,
+       
+			color:"black",
+			showOnTop:true,
+        } ,{
+            value:lasbtcchg,
+       
+			color:"black",
+			showOnTop:true,
+        }  ,{
+      
+        value: 0  ,
+			color:"orange",
+			thickness:5,
+			showOnTop:true,
+        }  
+        ], 
+ gridThickness:    0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 8, 
+  labelFontColor: "#000000", 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbtcchg  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+
+
+ 
+ ///////////////////////////
+
+var dataPointsbnbchg=[];
+db.transaction(function (tx) { 
+
+var lasbnbchgg=0;
+var lasbnbchg=0;
+            tx.executeSql('SELECT * FROM bnbchg ', [], function (tx, results) { 
+               var lenbzghh = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbzghh; i++) { 
+			  lasbnbchgg=results.rows.item(i).idr2;
+			   lasbnbchg=results.rows.item(i).idr;
+		 
+			     dataPointsbnbchg.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },{ x: i, y:results.rows.item(i).idr2,lineThickness:2 },  );
+   		
+ 
+				  
+			 
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksdchg = lasbnbchg + ((3/100)*lasbnbchg);
+		 
+  var minsdchg = lasbnbchg-((3/100)*lasbnbchg);
+		 	 
+ var inter =((0.8/100)*lasbnbchg);
+ 
+ 
+ var mek= i + 100;
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" , lineThickness:0.1,color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"BTC ", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("bnbchgl", {
+ backgroundColor: "transparent ",
+    title: 
+		{
+			text: "   bnb"   ,  fontColor: "#F5BA63", 
+			
+		},
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+ 	maximum:25,minimum:-25,interval:15,
+ stripLines: [ 
+		 {
+            startValue:lasbnbchg,
+            endValue: 0  ,
+			color:"red",
+			 
+        }  ,{
+            startValue:lasbnbchgg,
+        endValue: 0  ,
+			color:"green",
+        } ,{
+           value:lasbnbchgg,
+         showOnTop:true,
+			color:"black",
+        }  ,{
+           value:lasbnbchg,
+         showOnTop:true,
+			color:"black",
+        } ,{
+      
+        value: 0  ,
+			color:"orange",
+			thickness:5,
+			showOnTop:true,
+        }  
+        ], 
+ gridThickness:    0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 8, 
+  labelFontColor: "#000000", 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbnbchg  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+ ///////////////////////////
+
+var dataPointsbnbhedgechg=[];
+db.transaction(function (tx) { 
+
+var lasbnbhedgechgg=0;
+var lasbnbhedgechg=0;
+            tx.executeSql('SELECT * FROM bnbhedgechg ', [], function (tx, results) { 
+               var lenbzghh = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbzghh; i++) { 
+			  lasbnbhedgechgg=results.rows.item(i).idr2;
+			   lasbnbhedgechg=results.rows.item(i).idr;
+		 
+			     dataPointsbnbhedgechg.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },{ x: i, y:results.rows.item(i).idr2,lineThickness:2 },  );
+   		
+ 
+				  
+			 
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksdchg = lasbnbhedgechg + ((3/100)*lasbnbhedgechg);
+		 
+  var minsdchg = lasbnbhedgechg-((3/100)*lasbnbhedgechg);
+		 	 
+ var inter =((0.8/100)*lasbnbhedgechg);
+ 
+ 
+ var mek= i + 100;
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" ,lineThickness:0.1, color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"BTC ", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("bnbhedgechg", {
+ backgroundColor: "transparent ",
+    title: 
+		{
+			text: "   bnbhedge"      ,  fontColor: "#F5BA63",        
+		},
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+ 	maximum:25,minimum:-25,interval:15,
+ stripLines: [ 
+		 {
+            startValue:lasbnbhedgechg,
+            endValue: 0  ,
+			color:"red",
+			  
+        }  ,{
+            startValue:lasbnbhedgechgg,
+        endValue: 0  ,
+			color:"green",
+        }  ,{
+           value:lasbnbhedgechgg,
+         showOnTop:true,
+			color:"black",
+        },{
+           value:lasbnbhedgechg ,
+         showOnTop:true,
+			color:"black",
+        }  ,{
+      
+        value: 0  ,
+			color:"orange",
+			thickness:5,
+			showOnTop:true,
+        }  
+        ], 
+ gridThickness:    0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 8, 
+  labelFontColor: "#000000", 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbnbhedgechg  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ ///////////////////////////
+
+var dataPointsbtcchgall=[];
+db.transaction(function (tx) { 
+ 
+var lasbtcchgall=0;
+            tx.executeSql('SELECT * FROM ALLCHG', [], function (tx, results) { 
+               var lenbzv = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbzv; i++) { 
+			 
+			   lasbtcchgall=results.rows.item(i).idr;
+ 
+			   if (i  >  0 && len >  0 ){
+			   
+ 
+			   
+			   
+			   
+			   
+			   
+			     dataPointsbtcchgall.push({ x: i, y:results.rows.item(i).idr }, { x: i, y:0  }, );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksdchg = lasbtcchgall + ((3/100)*lasbtcchgall);
+		 
+  var minsdchg = lasbtcchgall-((3/100)*lasbtcchgall);
+		 	 
+ var inter =((0.8/100)*lasbtcchgall);
+ 
+ 
+ var mek= i;
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" ,lineThickness:0.5, color:"black",indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"BTC ", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("ALLCHG", {
+ backgroundColor: "transparent ",
+    
+		axisX:{   
+		 	 maximum:mek,
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+ 	 minimum:100,maximum:5500,
+ stripLines: [ 
+ {
+            startValue:lasbtcchgall,
+			endValue: 10000,
+          label: lasbtcchgall  ,
+		  
+			color:"#E8E9ED",
+        }  ,
+		 {
+            startValue:lasbtcchgall,
+			endValue:100,
+         // label: lasbtcchgall  ,
+		  
+			color:"#A0A0A0",
+        }  , {
+			 
+			 startValue:0,
+            endValue:100,  
+           // value:lasbtc,
+           
+			color:"#A0A0A0",
+        }, {
+			 
+			 startValue:0,
+            endValue:200,  
+           // value:lasbtc,
+           
+			color:"yellow",
+        } 
+
+        ], 
+ gridThickness:    0     , tickLength: 0,
+lineThickness: 0,labelFontSize: 8, 
+  labelFontColor: "#000000", labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbtcchgall  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+
+
+
+
+
+  var maksd = 0;
+  var minsd =0;
+  var lasusdt=0;  
+  var lasusdtx=0;  
+  var lasusdtbfx=0;
+    var lasusdtbusd=0;
+	  var lasusdtusdc=0;
+	  	  var lasusdtusdp=0;
+ ///////////////////////////
+var dataPointsusdt =[];
+var dataPointsusdk =[];
+var dataPointsusdol =[];
+var dataPointsusdc =[];
+var dataPointsusdbusd =[];
+var dataPointsusdp =[];
+db.transaction(function (tx) { 
+
+
+ 
+            tx.executeSql('SELECT * FROM usdtlog', [], function (tx, results) { 
+               var lenbb = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbb; i++) { 
+			 
+			     lasusdt=results.rows.item(i).idr;
+			    lasusdtx=results.rows.item(i).idr2;
+				lasusdtbfx=results.rows.item(i).idr3;
+				lasusdtbusd=results.rows.item(i).idr4;
+				lasusdtusdc=results.rows.item(i).idr5;
+				lasusdtusdp=results.rows.item(i).idr6;
+			   if (lasusdt  > 0 && len >  0 ){
+			     dataPointsusdt.push({ x: i, y:results.rows.item(i).idr,lineThickness:1,color:"blue",toolTipContent:"usdt"+lasusdt	, },  );
+   		         dataPointsusdk.push({ x: i, y:results.rows.item(i).idr2,lineThickness:1,color:"black",toolTipContent:"usd "+lasusdtx	, },  );
+   		        dataPointsusdol.push({ x: i, y:results.rows.item(i).idr3,lineThickness:1,color:"black",toolTipContent:"usd bfx", },  );
+   		        dataPointsusdbusd.push({ x: i, y:results.rows.item(i).idr4,lineThickness:1,color:"black",toolTipContent:"busd", },  );
+   		         dataPointsusdc.push({ x: i, y:results.rows.item(i).idr5,lineThickness:1,color:"black",toolTipContent:"usdc", },  );
+   		dataPointsusdp.push({ x: i, y:results.rows.item(i).idr6,lineThickness:1,color:"black",toolTipContent:"usdp", },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+			   var bb=i  ;
+			   var maxb=  i +200;
+			      var bba=i+90  ;var bbb=i+ 60  ;var bbc=i+180  ;var bbd=i+170  ;var bbe=i+30  ;var bbf=i+10  ;
+			     dataPointsusdt.push({ x: bba, y:lasusdt,lineThickness:1,color:"red",indexLabel:"1 : " , markerSize:10},  );
+   		        dataPointsusdk.push({ x: bbc , y:lasusdtx,lineThickness:1,color:"black",indexLabel:"  5:" , markerSize:10},  );
+   		       dataPointsusdol.push({ x: bbd, y:lasusdtbfx,lineThickness:1,color:"blue",indexLabel:" 4  :" , markerSize:10},  );
+   		dataPointsusdbusd.push({ x: bbb, y:lasusdtbusd,lineThickness:1,color:"orange",indexLabel:" 2 :" , markerSize:10},  );
+   		dataPointsusdc.push({ x: bbe, y:lasusdtusdc,lineThickness:1,color:"green",indexLabel:"  3 :" , markerSize:10},  );
+   		dataPointsusdp.push({ x: bbf, y:lasusdtusdp,lineThickness:1,color:"green",indexLabel:" 6  :" , markerSize:10},  );
+   		
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 maksd = lasusdt + ((2/100)*lasusdt);
+		 
+  minsd = lasusdt - ((2/100)*lasusdt);
+		 	 
+ 
+ 
+ 
+  var perub=  lasusdt/dolark ;
+ 
+ 
+ 
+ 
+ var data = [];
+ var dataSeriesusdp = {type: "line", color:"green" ,lineThickness:0.1, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+
+ var dataSeriesusdc = {type: "line", color:"green" ,lineThickness:0.1, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+var dataSeriesbusd  = {type: "line", color:"red" ,lineThickness:0.01, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+
+var dataSeriesdol = {type: "line", color:"#3CEC7C" ,lineThickness:1, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+		 
+var dataSeriesk = {type: "line", color:"black" , lineThickness: 1,indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+		
+		var dataSeries = {type: "line" , color:"blue",lineThickness: 1, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test",  } ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("dailyusdt", {
+ backgroundColor: "transparent ",
+    title:{
+     //  text: "usdt x usd"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 maximum:maxb, 
+gridThickness:  0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	// interval:250 ,maximum:15500,minimum:13500,
+	//title: "BELI BTC SAAT DOLAR TINGGI",titleFontSize: 15,titleFontColor: "red",
+ stripLines: [ 
+ {
+	 
+            startValue:17000,  
+           endValue:13500,
+ 
+			color:"#fff",
+        },
+		  
+		<!-- { -->
+			 
+			 	 <!-- startValue:+lasusdt, -->
+            <!-- endValue:+husdt,   -->
+            
+			<!-- color:"#E8E9ED", -->
+        <!-- }, -->
+		 <!-- { -->
+			 
+			 	 <!-- startValue:+lasusdt, -->
+            <!-- endValue:+lusdt,    -->
+			<!-- color:"#A0A0A0", -->
+        <!-- }, -->
+<!-- { -->
+            <!-- value:husdt, -->
+            <!-- label: "" , -->
+			<!-- color:"#A0A0A0", -->
+        <!-- }, -->
+<!-- { -->
+            <!-- value:lusdt, -->
+            <!-- label: '' , -->
+			<!-- color:"#A0A0A0", -->
+        <!-- }	,  { -->
+            <!-- startValue:+susdt, -->
+            <!-- endValue: +busdt , -->
+			<!-- color:"orange", -->
+        <!-- }  ,	 -->
+        ], 
+ gridThickness:    0.3    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",
+   <!-- labelFormatter: function(){ -->
+	 <!-- return " "; -->
+ <!-- },  -->
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsusdt  ;
+		dataSeriesusdc.dataPoints = dataPointsusdc  ;
+		dataSeriesusdp.dataPoints = dataPointsusdp  ;
+			dataSeriesbusd.dataPoints = dataPointsusdbusd  ;
+	dataSeriesdol.dataPoints = dataPointsusdol  ;
+	dataSeriesk.dataPoints = dataPointsusdk  ;
+	data.push(dataSeriesusdp,dataSeriesusdc,dataSeriesbusd,dataSeriesdol,dataSeriesk,dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+ ///////////////////////////
+var dataPointsxau =[];
+
+db.transaction(function (tx) { 
+
+var hxau=0;
+var lxau=0;
+var lasxau=0;
+            tx.executeSql('SELECT * FROM xaulog', [], function (tx, results) { 
+               var lenbbcs = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbbcs; i++) { 
+			 
+			   lasxau=results.rows.item(i).last;
+			    lxau=results.rows.item(i).low;
+				hxau=results.rows.item(i).high;
+			   if (lasxau  > 0 && lenbbcs >  0 ){
+			     dataPointsxau.push({ x: i, y:results.rows.item(i).last,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		  var maksd = lasxau + ((2/100)*lasxau);
+		 
+ var minsd = lasxau - ((2/100)*lasxau);
+		 	 
+ 
+ 
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" , color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("dailyxau", {
+ backgroundColor: "transparent ",
+    title:{
+		fontColor: "#F5BA63", 
+       text: "xau"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	//maximum:hxau,minimum:lxau,
+ stripLines: [ 
+  {
+			 showOnTop:true,
+			 value:+lasxau, 
+        // label: lasxau ,
+		 labelFontSize:50,
+		 thickness:5,
+			color:"red",
+        },{
+			 
+			 startValue:+lasxau, 
+         endValue: hxau ,
+			color:"#E8E9ED",
+        },{
+			 
+			 startValue:+lasxau, 
+         endValue: lxau ,
+			color:"#A0A0A0",
+        },
+ 
+        ], 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsxau  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+
+
+ 
+ ///////////////////////////
+var dataPointsusd =[];
+
+db.transaction(function (tx) { 
+
+
+var lasusd=0;
+            tx.executeSql('SELECT * FROM dolar', [], function (tx, results) { 
+               var lenbbc = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbbc; i++) { 
+			 
+			   lasusd=results.rows.item(i).idr;
+			   if (lasusd  > 0 && lenbbc >  0 ){
+			     dataPointsusd.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+	  var maksd = lasusd + ((2/100)*lasusd);
+		 
+  var minsd = lasusd - ((2/100)*lasusd);
+		 	 
+ 
+ 
+ 
+ var warnaku="#A0A0A0";
+ if (dolar > lasusdt){warnaku="green";}
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line", color:"black" , indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("dailyusd", {
+ backgroundColor: "transparent ",
+    title:{
+		fontColor: "#F5BA63", 
+       text: "usd"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	//maximum:maksd,minimum:minsd,
+ stripLines: [ 
+ 
+		 {
+			 
+			 	 startValue:+dolar,   
+ 
+			 	 endValue:+hdolar, 
+           // label: lasusd ,
+			color:"#A0A0A0",
+        },  {
+			 
+			 	 startValue:+dolar,   
+ 
+			 	 endValue:+ldolar, 
+           // label: lasusd ,
+			color:"#E8E9ED",
+        }, {
+			 
+			 value:+dolar, 
+ //label: dolar ,
+			color:"red",
+        },
+  {
+			 
+			 value:+dolark, 
+// label: dolar ,
+			color:"black",
+        },
+        ], 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsusd  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+
+
+
+ 
+
+
+
+ 
+ ///////////////////////////
+var dataPointsbnb =[];
+
+db.transaction(function (tx) { 
+
+
+var lasbnb=0;
+            tx.executeSql('SELECT * FROM bnblog', [], function (tx, results) { 
+               var lenbbc = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbbc; i++) { 
+			 
+			   lasbnb=results.rows.item(i).idr;
+			   if (lasbnb  > 0 && len >  0 ){
+			     dataPointsbnb.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksc = lasbnb + ((20/100)*lasbnb);
+		 
+  var minsc = lasbnb - ((20/100)*lasbnb);
+		 	 
+ 
+ 
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line", color:"black" , indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("dailybnb", {
+ backgroundColor: "transparent ",
+    title:{
+		fontColor: "#F5BA63", 
+       text: "bnb"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  
+	//maximum:hbnb,minimum:lbnb,
+ stripLines: [ 
+		 {
+            startValue:+lasbnb,
+            endValue:+hbnb,  
+         
+			color:"#E8E9ED",
+        }  ,
+		{
+            startValue:+lasbnb,
+            endValue:+lbnb,  
+         
+			color:"#A0A0A0",
+        }  ,
+		 {
+            value:hbnb,
+            label: '' ,
+			color:"#A0A0A0",
+        }  ,
+		 {
+            value:lbnb,
+            label: '' ,
+			color:"#A0A0A0",
+        }  ,  {
+            startValue:+sbnb,
+            endValue: +bbnb ,
+			color:"orange",
+        }  ,
+        ], 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbnb  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+ 
+ ///////////////////////////
+var dataPointsusbnbhedge =[];
+var dataPointsusbnbk  =[];
+db.transaction(function (tx) { 
+
+
+var lasusbnbhedge=0;
+            tx.executeSql('SELECT * FROM bnbhedgelog', [], function (tx, results) { 
+               var lenbbci = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbbci; i++) { 
+			 
+			   lasusbnbhedge=results.rows.item(i).idr;
+			   if (lasusbnbhedge  > 0 && len >  0 ){
+			     dataPointsusbnbhedge.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+ 
+ 
+		 var maksbnbhedge = lasusbnbhedge + ((20/100)*lasusbnbhedge);
+		 
+  var minsbnbhedge = lasusbnbhedge - ((20/100)*lasusbnbhedge);
+		 	 
+ 
+ 
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "line" , color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("dailybnbhedge", {
+ backgroundColor: "transparent ",
+    title:{
+       text: "bnbhed "   , fontSize: 15,
+fontColor: "#F5BA63",       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+//	maximum:hbnbhedge,minimum:lbnbhedge,
+ stripLines: [ 
+ 
+		 {
+            startValue:+lasusbnbhedge,
+            endValue: +hbnbhedge ,
+			color:"#E8E9ED",
+        }  ,{
+           startValue:+lasusbnbhedge,
+            endValue: +lbnbhedge ,
+			color:"#A0A0A0",
+        }   ,  {
+            startValue:+sbnbhedge,
+            endValue: +bbnbhedge ,
+			color:"orange",
+        }  ,  {
+            startValue:+sbnbhedge,
+            endValue: +bbnbhedge ,
+			color:"orange",
+        }  ,
+        ], 
+ gridThickness:    0     , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsusbnbhedge  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+
+
+/////////////////////////
+
+
+
+
+
+
+
+
+
+ // totvol +=totalvolume;
+// var semuv = totvol;
+ // var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024); 
+  
+  // alert (semuv);
+  
+// db.transaction(function (tx) { 
+   // tx.executeSql('CREATE TABLE IF NOT EXISTS VOLUME (id unique, log)'); 
+   // tx.executeSql('INSERT INTO VOLUME (id, log) VALUES ('+nonce+', '+semuv+')');  
+// }); 
+
+
+
+
+ 
+ 
+
+	<!-- var nonceg=Math.floor(Date.now() / 1000); -->
+	 
+<!-- var post ='method=tradeHistory&count=200&pair='+namaalt+'&nonce='+nonceg; -->
+<!-- var sha512screet = CryptoJS.HmacSHA512(post, screet); -->
+ 
+ <!-- const buri = 'https://indodax.com/tapi/'; -->
+ <!-- let hb = new Headers();  -->
+ <!-- hb.append('Content-Type','application/x-www-form-urlencoded');  -->
+  <!-- hb.append('User-Agent','ES MELON  \n\r');  -->
+<!-- hb.append('Sign', sha512screet) -->
+<!-- hb.append('Key', key)  -->
+<!-- let reqb = new Request(buri, { -->
+    <!-- method: 'POST', -->
+    <!-- headers: hb, -->
+    <!-- body: post, -->
+<!-- }); -->
+<!-- fetch(reqb) -->
+    <!-- .then( -->
+    <!-- function(response) { -->
+      <!-- if (response.status !== 200) { -->
+        <!-- console.log('error: ' +  response.status); -->
+       <!-- return; -->
+      <!-- } -->
+
+    
+      <!-- response.text().then(function(data) { -->
+	  
+	 		  var xmlhttpff = new XMLHttpRequest();
+xmlhttpff.onreadystatechange = function(){
+  if(xmlhttpff.status == 200 && xmlhttpff.readyState == 4){
+  
+   //myblnc = JSON.parse(xmlhttpf.responseText);  
+ 
+	   
+	  
+   myObj = JSON.parse(xmlhttpff.responseText);
+	 console.log(myObj);
+  const cd  = myObj.return.trades;
+  var dataPointslastrade=[];
+   var dataPointslastradepct=[]; 
+     var pricev =0;
+  var akhirprice =0;
+   var buypt=0;
+ var selpt=0;
+   var ambuy=0;
+   var totpr=0;
+ var amsel=0;
+ var bb =-5;
+  var bbp =5;
+  var  amouncoin=0;
+  let vabb = "";
+let vbb = "";
+var cc=0;
+for (const x in cd) {
+   bb--;
+   bbp++;
+   vbb += cd[x] + ", ";
+   vabb += x + ", ";
+   var curency = cd[x]["currency"]; 
+      var trade_time = cd[x]["trade_time"]; 
+	    var order_id = cd[x]["order_id"]; 
+		  var type = cd[x]["type"]; 
+		   var  pricev = cd[x]["price"]; 
+		   var amouncoin = cd[x][altc]; 
+   //console.log(order_id + pricev  );
+   cc++;
+  totpr = pricev *  amouncoin;
+   var warna= "red";
+   if ( pricev <= hargabid && type=="sell"){
+  
+	selpt += totpr;
+	  amsel+=cd[x][altc];
+	}
+    
+   if ( pricev <= hargabid && type=="buy"){
+	buypt += totpr;  
+	  ambuy+=cd[x][altc];
+	 }
+	 
+     if (type=="buy"){
+	 
+	 
+	 warna= "black";}
+ 
+	  if (type=="buy" && totpr > 100000 ){warna= "pink";}
+	  	 if (type=="buy" && totpr > 500000 ){warna= "cyan";}
+	 	 if (type=="sell"   ){warna= "red";}
+	 if (bb==-1){ akhirprice=+pricev;}
+	 
+	 		
+	var nokoma=	(Math.round(totpr));
+	if ( type=="buy"){
+    dataPointslastrade.push(  { x:bb , y: +pricev,  toolTipContent:type +"-"+totpr+' - '+pricev,color:warna,markerSize:5,lineThickness: 0 ,showOnTop:true } ,   );
+   //  console.log(dataPointslastrade);
+
+	}
+	if ( type=="sell"){
+    dataPointslastrade.push(  { x:bbp , y: +pricev,  toolTipContent:type +"-"+totpr+' - '+pricev,color:warna,markerSize:5,lineThickness: 0 ,showOnTop:true } ,   );
+   //  console.log(dataPointslastrade);
+
+	}
+
+   }
+   var totalodsrp=   selpt;
+   var totalodbrp=   buypt;
+   
+   var selisi= totalodbrp - totalodsrp;
+   var totodrbybid =   ambuy  ;
+    var totodrbysel =   amsel   * hargabid  ;
+	
+	 <!-- var saa=0; -->
+ 
+	  <!-- var textk2=0; -->
+	 <!-- var textk=0; -->
+ 
+    <!-- for (  i = 0; i < 70; i++) { -->
+	  <!-- textk =i * 15; -->
+	 <!-- var   perso = akhirprice +((textk/100)*akhirprice)  ;  -->
+	  <!-- saa = "pair="+altc+"_idr&type=sell&"+altc+"=00&price="+perso+"";	 -->
+
+       	 <!-- dataPointslastradepct.push( { x:5 , y:  perso ,toolTipContent:saa,   markerSize:2 ,color:"black",click: onClick, link:saa  } , );  -->
+  
+	<!-- } -->
+    
+   
+ 
+ 
+	 <!-- for (  i = 0; i < 70; i++) { -->
+      <!-- textk2 =i * 15;  -->
+	 <!-- var  pers = akhirprice - ((textk2/100)*akhirprice)  ; -->
+ 
+  <!-- var persod = Math.abs(pers);  -->
+ <!-- saab  = "pair="+altc+"_idr&type=buy&idr=11&price="+persod+"";	 -->
+ 
+       	 <!-- dataPointslastradepct.push( { x:5 , y:  pers ,toolTipContent:saa,  markerSize:2 ,color:"black",click: onClick, link:saab  } , );  -->
+ 
+	  
+	  <!-- }  -->
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+		   		 
+ 		   var totbuy=0;
+var totsell=0;
+   
+   //console.log(json);
+  var dataPointstengahx=[];
+ var xa=0;
+  
+  const cdg  = bookorderx  ; 
+  
+ 
+
+  let vaxx = "";
+let vbxx = "";
+for (const x in cdg) {
+   vbxx += cdg[x] + ", ";
+   vaxx += x + ", ";
+ if (x=="buy"){
+   // console.log(x);
+     
+  
+   
+ for (var i = 0; i <  cdg[x].length; i++) {
+	//   for (var i = 0; i <  10; i++) {
+        var model = cdg[x][i][0] ;
+		var model1 = cdg[x][i][1] ; 
+  
+  var pric= (model *model1)  ; 
+  var prk=	(Math.round(pric));
+  var th = prk.toLocaleString();
+  totbuy +=model *model1;
+  var nmclasx="green";
+  
+  //if (prk > 10000000){nmclas="info";}
+ 
+	    if (totbuy <= 10000000 ){nmclasx="yellow";}
+		    if (model >=  hargabid ){nmclasx="red";}
+  dataPointstengahx.push( { x:0 , y:  +model ,markerSize:5,markerColor:nmclasx }, ); 
+ 
+ 
+  if (i < 13){
+ document.getElementById("bookb").innerHTML  +=  '<div class="text-'+nmclasx+'">  B: '+th+'  </div>';
+  }
+
+ //dataPointsodr.push(  {  y: prk ,name: "b",exploded:true},    );
+  // console.log(model);
+    
+	}
+		
+	}	
+	
+
+
+
+	//////////
+	
+	 if (x=="sell"){
+   
+     
+  
+   
+//for (var i = cd[x].length - 1; i >= 0; i--) {
+
+   for (var i = 0; i <  cdg[x].length; i++) {
+	//    for (var i = 0; i <  10; i++) {
+         var model = cdg[x][i][0] ;
+		var model1 = cdg[x][i][1] ; 
+  
+  var pric=( model *model1 ) ;;
+    var prk=	(Math.round(pric));
+	  var th = prk.toLocaleString();
+	    var nmclas="pink";
+    totsell +=model *model1;
+  //if (prk > 10000000){nmclas="info";}
+     
+	    if (totsell <= 10000000 ){nmclas="yellow";}
+	 if (totsell <= 1000000 ){nmclas="red";}
+ dataPointstengahx.push( { x:0 , y:  +model ,markerSize:5,markerColor:nmclas }, ); 
+ 
+ 
+ if (i < 13){
+   document.getElementById("books").innerHTML  +=  '<div class="text-'+nmclas+'"> S: '+th+' </div>';
+   //console.log(model);
+ }
+ 
+	}
+	
+	
+	
+	
+	
+	 
+	
+	}
+ 
+		
+ 
+	
+
+
+   
+ }
+		 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+		 
+		 var minb =  harga / 1.02 ;
+		  var maxb = hargah * 1.02 ; 
+   var data = [];
+ 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+	    var dataSeriespct = {type: "scatter", color:"black" ,lineThickness:0.01,  showInLegend: false,  legendText:cry,  } ;
+		
+		var dataSeries = {type: "line" , color:"black",lineThickness:0.01,  showInLegend: false,  } ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("lasttrade", {
+ backgroundColor: "transparent ",
+  title:{
+    //   text:  cry+'   ' , fontSize: 15,       
+      },
+		axisX:{   maximum:100     , minimum: -100 ,interval:45,
+gridThickness:  0     , tickLength: 0,
+lineThickness: 0,labelFontSize: 12, 
+ 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    }, labelFormatter: function(){
+	return " ";
+}, 
+			 
+		},
+	axisY:[{  
+	//title: "|======|======|======|======|======|======|======|======>>", 
+	maximum:maxb,	minimum:minb,  interval:0,
+	stripLines: [   
+		 { 
+		 thickness:2,
+            value:harga, 
+			color:"black",
+			showOnTop:true,
+        } 
+, { 
+		 thickness:0.5,
+            value:+hargah, 
+			//endValue:+harga,
+			color:"green",
+        } 
+, { 
+		 thickness:0.5,
+            //startValue:+harga, 
+			value:+hargal,
+			color:"pink",
+        } 
+, { 
+		 thickness:0.5,
+            value:hargal, 
+			color:"#A0A0A0",
+        },	
+		{ 
+		  
+            startValue:+hargabid,
+            endValue:+hargaask,			
+			color:"yellow",
+			//showOnTop:true,
+        } ],labelFormatter: function(){
+	return " ";
+}, 
+	
+	
+ gridThickness:    0     , tickLength:  0,
+lineThickness: 0,labelFontSize: 12, 
+  labelFontColor: "#000000", 
+	}],
+ 
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointslastrade  ;
+		dataSeriespct.dataPoints = dataPointstengahx  ;
+	data.push( dataSeriespct,dataSeries );
+	 console.log(dataSeriespct);
+	
+	chart.render();
+ 
+		 function onClick(e) {
+	
+	Rorder(piro=saa);
+		 
+	}
+ 
+	 
+	 
+ 		  <!-- }) -->
+	   <!-- }  -->
+<!-- )	   -->
+}
+ };
+  xmlhttpff.open("GET","api/lastrade"+cry+".txt" + '?' + new Date().getTime(), true);
+xmlhttpff.send(null);
+ 
+ 			   
+            }, null); 
+        
+		 
+		 
+		 
+		 var setengah= semua/2;
+	var setengah2= setengah/2;
+		 
+		 
+	 
+ 
+var data = [];
+ 
+		  var dataSeriesbuy = {type: "line" , color:"black", indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		 
+        var dataSeriessell = {type: "line", color:"black" , indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+		var dataSeries = {type: "column" , color:"black", indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("chartsaldo", {
+ backgroundColor: "transparent ",
+   
+		axisX:{  
+		  stripLines: [ 	 {
+            value:   linesal ,
+            label:"",
+			color:"cyan",
+			thickness:10,
+        } ],
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  minimum:-500000,interval:500000,maximum:semua,
+ stripLines: [ 
+		 {
+            value:  sidr ,
+            label: sidr  ,
+			color:"#A0A0A0",
+        } , {
+            value:  500000 ,
+            label: "   "  ,
+			color:"#A0A0A0",
+			lineDashType: "dot",
+        } , {
+            startValue:+setengah,
+            endValue: 0 ,
+			color:"orange",
+        } , {
+            startValue:+setengah2,
+            endValue: 0 ,
+			color:"#E8E9ED",
+        } 
+        ],
+ gridThickness:    0.5    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPoints2  ;
+	//dataSeriessell.dataPoints = dataPointssell  ;
+	//	dataSeriesbuy.dataPoints = dataPointsbuy  ;
+	data.push(dataSeries , dataSeriessell,dataSeriesbuy);
+	 
+	
+	chart.render();
+ 
+ 
+var data = [];
+  setCookiexxx("sell",""+datablack+"",7);
+  setCookiexxx("buy",""+datablack2+"",7);		 
+		 
+	 
+	  var nonce=Math.floor(Date.now() / 1000);
+ var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+ db.transaction(function (tx) {  
+ tx.executeSql('CREATE TABLE IF NOT EXISTS databuysell (id unique, idr,idr2)');   
+ tx.executeSql('INSERT INTO databuysell (id, idr,idr2) VALUES ('+nonce+', '+datablack+', '+datablack2+')');  
+ });  
+ 		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		
+		var dataSeries = {type: "line" , color:"black",  lineThickness:0.1,labelPlacement:"inside",  indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("chartvirtual", {
+ title:{
+		//text: "check black color"
+	},
+	legend: {
+		fontSize: 20
+	},
+  backgroundColor: "transparent ",
+		axisX:{  	stripLines: [ 
+		 {
+            value:  nombre ,
+            label: cry,
+			color:"cyan",
+			thickness:	15,
+			labelFontColor:"blue",
+        }  ,  
+        ],
+		
+		
+gridThickness:  0     , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	 axisY:[{   
+		stripLines: [ 
+		 
+		 { startValue:20,
+		    label:datablack +" " ,
+        endValue:30,
+   
+			 color:"#A0A0A0",
+
+			} 
+			,
+			{ startValue:0,
+		  
+        endValue:datablack,
+   
+			 color:"red",
+
+			} 
+			, 	{ startValue:0,
+		  
+        endValue:datablack2,
+   
+			 color:"red",
+
+			} 
+			, 
+			{ startValue:10,
+
+			endValue:20,
+  label:"zona play game" ,
+			color:"yellow",
+
+			} 
+			,{ startValue:-10,
+
+			endValue:-20,
+  label:"zona play game" ,
+			color:"yellow",
+
+			} 
+			,
+			{ value:0,
+thickness:3 ,
+  label:"zero sum game" ,
+  labelFontSize:30,
+			color:"white",
+			showOnTop:true,
+			} 
+			,
+
+	<!-- { startValue:6, -->
+		<!-- endValue:-6, -->
+         <!-- label:"  4.5   rata rata " , -->
+		  <!-- labelPlacement: "inside", -->
+        <!-- labelAlign: "far", -->
+		<!-- color:"white", -->
+		<!-- //showOnTop:true, -->
+	 
+		 
+        <!-- } , -->
+
+
+		{
+			 
+			 startValue:-20,
+			 label:datablack2+" " ,
+            endValue:-30,  
+           // value:lasbtc,
+           
+			color:"#A0A0A0",
+        },
+
+ ]	,
+// ,{
+		
+		
+		 // startValue:-20,
+                // endValue:-30,                
+                // color:"#d8d8d8",
+                // label : "AREA BUY 2",
+                // labelFontColor: "#a8a8a8",
+				// labelAlign: "center",
+				 // lableFontSize: 35,
+        // },{
+		
+		
+		 // startValue:-10,
+                // endValue:-20,                
+                // color:"gray",
+                // label : "AREA BUY 1",
+                // labelFontColor: "#a8a8a8",
+				// labelAlign: "center",
+				 // lableFontSize: 35,
+        // },{
+		
+		
+		 // startValue:-0,
+                // endValue:-10,                
+                // color:"white",
+                // label : "NO TRANSAKSI",
+                // labelFontColor: "#a8a8a8",
+				// labelAlign: "center",
+				 // lableFontSize: 35,
+        // }], 
+		 <!-- interlacedColor: "Azure", -->
+   
+      <!-- tickColor: "navy", -->
+      <!-- gridColor: "navy", -->
+  interval:5,minimum:-30, maximum: 30 ,
+ gridThickness:    0.5    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  // labelFontColor: "#000000",
+    labelFormatter: function(){
+	return " ";
+}, 
+ 
+
+	}],
+	axisY2: {
+		
+ 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+ 
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsvir  ;
+ 
+	data.push(dataSeries );
+	 
+	
+	chart.render();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ///////////////////////////
+var dataPointsbnbs =[];
+
+db.transaction(function (tx) { 
+
+var lasbnbs=0;
+var lasbnbb=0;
+            tx.executeSql('SELECT * FROM databuysell', [], function (tx, results) { 
+               var lenbbcc = results.rows.length, i; 
+                 
+               for (i = 0; i < lenbbcc; i++) { 
+			   lasbnbs=results.rows.item(i).idr;
+			   lasbnbb=results.rows.item(i).idr2;
+			   if (lenbbcc  > 0   ){
+			     dataPointsbnbs.push({ x: i, y:results.rows.item(i).idr,lineThickness:2 },{ x: i, y:results.rows.item(i).idr2,lineThickness:2 },  );
+   		
+ 
+				  
+				  }
+				  
+                 
+               } 
+			   
+	//var kooo= i +5000;
+
+//############################
+  
+ 
+ 
+ 
+ var data = [];
+ 
+		 
+
+		var dataSeries = {type: "area", color:"black",lineThickness: 0.5, indexLabelPlacement: "inside",indexLabelFontSize: 18,  showInLegend: false,  legendText:"test", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("buysell", {
+ backgroundColor: "transparent ",
+    title:{
+		fontColor: "#F5BA63", 
+      // text: "info"   , fontSize: 15,       
+      },
+		axisX:{   
+		 	 
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{ 
+
+ 	maximum:7,minimum:-7,
+ 
+ stripLines: [ 
+		 
+		 
+ 	 { 
+		 
+		 startValue:7,
+		 
+        endValue:-7,
+   
+			 color:"green",
+		 
+        } 
+,
+ { 
+		 
+		 startValue:5,
+		 
+        endValue:-5,
+   
+			 color:"#fff",
+		 
+        } 
+,
+ { 
+		 
+		 value:0,
+         color:"orange",
+		 thickness:2,
+		 showOnTop:true,
+		 
+        } 
+		,
+ { 
+		 
+		 value:lasbnbs,
+         color:"orange",
+		 thickness:2,
+		 showOnTop:true,
+		 
+        } 
+		,
+ { 
+		 
+		 value:lasbnbb,
+         color:"orange",
+		 thickness:2,
+		 showOnTop:true,
+		 
+        } 
+,
+ ]	,
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ gridThickness:    0    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsbnbs  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+		
+	})		})
+ ///////////////////////////
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ }	 
+		 
+		 
+		 ); 
+
+
+
+
+
+  }
+ 
+ // }
+// };
+///xmlhttp.open("GET","https://indodax.com/api/summaries" + '?' + new Date().getTime(), true);
+
+ // xmlhttp.open("GET","api/sumaries.txt" + '?' + new Date().getTime(), true);
+// xmlhttp.send(null);
+ 
+
+ // }
+  // xmlhttp.open("GET", uri + '?' + new Date().getTime(), true);
+  // xmlhttp.send(null);
+  
+ 
+
+
+ 	  // })
+	   // } 
+// )	  
+	
+	 
+	
+	
+
+
+
+ 
+ 
+ }
+};
+ xmlhttpf.open("GET","api/balance.txt" + '?' + new Date().getTime(), true);
+xmlhttpf.send(null);
+  
+ 
+ 
+   
+ 
+ 
+ 
+	
+ //document.getElementById("pilih").innerHTML  = cry;
+
+
+
+function update(){
+ var x=0; 
+  var uri="https://indodax.com/api/chartdata/"+cry+"";
+    
+    
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+  
+		  var dataPointsdemo=[];    
+
+ var on=0;
+ var  valueb=0;
+    myObj = JSON.parse(this.responseText);
+	
+	
+	 // sessionStorage.setItem(cry, this.responseText);
+ localStorage.setItem(cry, this.responseText);
+ 
+	var hih=0;
+	var loh=0;
+    //console.log(myObj);
+   for (let i = 0; i < myObj.chart.length; i++) {
+   
+  x += myObj.chart[i];
+  on++;
+  
+  
+	<!-- time = splitpair[0]; -->
+	<!-- openc = splitpair[1]; -->
+	<!-- highc = splitpair[2]; -->
+	<!-- lowc = splitpair[3]; -->
+	<!-- closec = splitpair[4]; -->
+	<!-- volumec = splitpair[5]; -->
+	closecd=myObj.chart[i][4];
+	time=myObj.chart[i][0];
+	
+	
+if (on > 7){
+    dataPointsdemo.push({ x: on, y:myObj.chart[i][2]},{x: on, y:myObj.chart[i][4] },{x: on, y:myObj.chart[i][3]    }, );
+	 
+
+				 
+  if (myObj.chart[i][2] >=   valueb ) {
+      valueb =  myObj.chart[i][2];
+	
+  }
+	
+	
+	
+ }
+   // console.log(myObj.chart[i][1],myObj.chart[i][3]);
+ 
+   } 
+ //  setCookie(""+cry+"",""+valueb+"",7);
+  // var xx = getCookie(sel);
+  //console.log(xx);
+ 
+   var manb = on + 1500;
+  
+var data = [];
+ 
+		
+
+		var dataSeries = {type: "scatter" , color:"black",lineThickness:0.3, markerSize:1,markerColor:"pink " ,color:"black" } ;
+		
+ 
+
+	var chart = new CanvasJS.Chart("demo", {
+ 
+  backgroundColor: "transparent ",
+      title:{
+       text: cry       ,fontSize: 20,  
+	   fontColor: "#F5BA63", 
+      },
+		axisX:{ maximum:manb,
+		
+	 
+			  crosshair: {
+				 
+				   
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000",
+    },
+	interval:360,
+gridThickness:  0.1     , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+		  
+ 
+
+
+
+
+
+	
+		},
+ 
+	axisY : { 
+		
+	 stripLines: [ 
+		 {
+            value:  closecd ,
+            label: "   "  ,
+			color:"#A0A0A0",
+			
+        }  
+        ],
+		
+		gridThickness:  0     , tickLength: 0, lineThickness: 0,
+lineThickness: 0,
+		 
+		  crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000",
+    },
+labelFormatter: function(){
+	return " ";
+},
+
+ 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	
+	dataSeries.dataPoints = dataPointsdemo  ;
+	data.push(dataSeries);
+	
+    
+	chart.render();
+   
+	
+	  
+ 
+ 
+	
+	}
+	
+	
+	 xmlhttp.open("GET", uri + '?' + new Date().getTime(), true);
+  xmlhttp.send(null);
+	 
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	 
+	
+	
+	
+	
+	 
+function change_myselect(sel) {
+
+ 
+
+ 
+  setCookie("pilih",""+sel+"",7);
+ 
+ document.location.reload();
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function onClick(e){  
+
+  setCookie("pilih",""+this.link+"idr",7);
+ 
+	var request = new XMLHttpRequest()
+
+
+	request.open('GET',this.link,window.location.href=window.location.href , true)
+
+	request.send();
+
+
+
+
+	<!-- if (typeof (e.dataSeries.visible) === \"undefined\" || e.dataSeries.visible) { -->
+	<!-- e.dataSeries.visible = false; -->
+	<!-- } else { -->
+	<!-- e.dataSeries.visible = true; -->
+	<!-- } -->
+
+	<!-- e.chart.render(); -->
+
+
+
+ 	  
+
+	};
+  
+ 
+ 
+ //############################################
+ // manual insert chart
+
+chart (koin="demo"); 
+chart (koin="btcidr");
+//chart (koin="wbtcidr");
+ chart (koin="usdtidr");
+ chart (koin="usdcidr");
+//chart (koin="usdpidr");
+//chart (koin="daiidr");
+//chart (koin="lsilveridr");
+//chart (koin="xrphedgeidr"); 
+chart (koin="bnbhedgeidr");
+ chart (koin="ethidr") 
+// chart (koin="ethhedgeidr");  
+chart (koin="btcusdt"); 
+ chart (koin="busdidr"); 
+//chart (koin="lgoldidr");  
+chart (koin="hedgeidr");  
+ //chart (koin="bnbhedgeidr");  
+ chart (koin="bnbidr");  
+//chart (koin="dgxidr");  
+//chart (koin="xsgdidr");
+
+// chart (koin="idkidr"); 
+ chart (koin="demo90");  
+  chart (koin="demo7");  
+ 
+  
+ function chart(koin){
+
+var xa =0;
+var on =0;
+var i =0;
+var valueb =0;
+var valuek =100000000000000000000;
+var laskux=0;
+var laskuz=0;
+var laskux90=0;
+var i =0;
+var altks =0;
+var alamat = 0;
+var flast =0;
+  var txt = '';
+  var akhir ='';
+ 
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function(){
+  if(xmlhttp.status == 200 && xmlhttp.readyState == 4){
+   
+ flast = JSON.parse(xmlhttp.responseText);  
+ //var bbbk=localStorage.getItem('sumaries'); 
+ // flast = JSON.parse(bbbk);   
+// var data = localStorage.getItem("summaries");
+//console.log(data);
+    // myObj = JSON.parse(data);
+ 
+  const cd  = flast.tickers ;
+  let va = "";
+let vb = "";
+   var volumeku =0;
+  var totvo=0;
+for (const x in cd) {
+   vb += cd[x] + ", ";
+   va += x + ", ";
+ const name  = x ;  
+  const [alt,base] = x.split('_');
+  
+const high  = cd[x]["high"] ;
+const low  = cd[x]["low"] ;
+const last  = cd[x]["last"] ;
+const buy  = cd[x]["buy"] ;
+const sell  = cd[x]["sell"] ;
+const volidr  = cd[x]["vol_idr"] ;
+ 
+ 
+var pinkk =  alt+base ;
+
+ 
+ 
+if (pinkk == koin){
+
+altks =alt;
+ laskux = sell;
+laskuz = buy;
+}
+ 
+  if (cry == pinkk && koin == "demo"){ 
+  laskux = sell;
+  laskuz = buy;
+  
+  }
+   if (cry == pinkk && koin == "demo90"){ 
+  laskux = last - low;
+  laskuz =  last - low;
+  
+   akhir =  last ;
+  }
+   if (cry == pinkk && koin == "demo7"){ 
+  laskux = last - low;
+  laskuz =  last - low;
+  
+   akhir =  last ;
+  }
+ 
+}
+  
+ 
+  
+  var datac =  localStorage.getItem(koin);
+ ///console.log(datac);
+  var coun=0;
+  if (koin == "demo"  |  koin == "demo90" ){
+  var datac =  localStorage.getItem(cry);
+   
+  }
+  
+     
+ 
+  myObj90 = JSON.parse(datac);
+   var  dataPointsdemo90 =[];
+  
+   for (  i = 0; i < myObj90.chart.length; i++) {
+   
+ 
+  coun++;
+   }
+     
+   var relo = getCookie("reload");
+	 var setahun= coun - (relo/2);
+      var awal= coun - 21;
+ 
+ 
+ 
+    myObj = JSON.parse(datac);
+   var  dataPointsdemo =[];
+ 
+   for (  i = 0; i < myObj.chart.length; i++) {
+   
+  xa += myObj.chart[i];
+  on++;
+  
+  
+	<!-- time = splitpair[0]; -->
+	<!-- openc = splitpair[1]; -->
+	<!-- highc = splitpair[2]; -->
+	<!-- lowc = splitpair[3]; -->
+	<!-- closec = splitpair[4]; -->
+	<!-- volumec = splitpair[5]; -->
+	closecd=myObj.chart[i][4];
+	time=myObj.chart[i][0];
+
+ 
+
+	var bg = "transparent";
+		if (on > setahun){
+		
+ 
+ if (     laskux < myObj.chart[i][3]  )	{ alamat = "pair="+altks+"_idr&type=sell&"+altks+"=00&price=100000000000";	}
+if (     laskux >  myObj.chart[i][3]  )	{ alamat = "pair="+altks+"_idr&type=buy&idr=00&price=100000000000";	}
+  var poook= ((myObj.chart[i][2] / myObj.chart[i][3]) *100 )-100 ;
+ if (poook < 200 ){
+ 
+  dataPointsdemo.push({ x: on, y:myObj.chart[i][2] ,markerColor:"#A0A0A0"  },
+  {x: on, y:myObj.chart[i][3] ,markerColor:"#A0A0A0"   }, );
+	 
+   
+   }
+   
+				 
+  if (myObj.chart[i][2] >=   valueb ) {
+      valueb =  myObj.chart[i][2];
+	
+  }
+					 
+  if (myObj.chart[i][2] <=  valuek ) {
+      valuek =  myObj.chart[i][2];
+	
+  }
+	
+	
+ }
+  
+
+
+
+
+
+ 
+  
+ 
+   } 
+   
+   
+   
+   
+   ///////////////////////////////
+   
+
+ 
+ 
+ 
+ 
+ 
+ 
+   
+   var xab =0;
+   var onn=0;
+     for (  i = 0; i < myObj90.chart.length; i++) {
+   
+  xab += myObj90.chart[i];
+  onn++;
+  
+  
+	<!-- time = splitpair[0]; -->
+	<!-- openc = splitpair[1]; -->
+	<!-- highc = splitpair[2]; -->
+	<!-- lowc = splitpair[3]; -->
+	<!-- closec = splitpair[4]; -->
+	<!-- volumec = splitpair[5]; -->
+	closecd=myObj90.chart[i][4];
+	time=myObj90.chart[i][0];
+
+
+ 
+
+ 
+		if (onn > awal){
+		
+// var pooo= myObj90.chart[i][2] - laskux;
+  var pooo2= ((myObj90.chart[i][2]  - myObj90.chart[i][3]) ) ;
+    var pooo= ((    akhir-myObj90.chart[i][3] )) ;
+  dataPointsdemo90.push(
+  { x: onn, y:pooo2,markerColor:"#A0A0A0"  }, );
+   
+	 
+ 
+	
+	
+ }
+  
+
+
+
+
+
+ 
+  
+ 
+   } 
+   
+   
+   
+   
+   
+   
+    
+   
+   
+   
+////////////////////////////////   
+   
+   
+   var mki = on +  15   ;
+   
+   
+   
+   var maxc = valueb;
+   var minc = ''; 
+
+   	   if (koin == "xsgdidr"){ maxc ="15000"}
+    if (koin == "xsgdidr"){ minc ="9900"}
+ 
+	   if (koin == "usdpidr"){ maxc ="24000"}
+    if (koin == "usdpidr"){ minc ="13000"}
+      if (koin == "btcidr"){ maxc =laskux *2;}
+	    if (koin == "wbtcidr"){ maxc =laskux *2;}
+    if (koin == "btcusdt"){ maxc =laskux *2;}
+   <!-- if (koin == "usdtidr"){ maxc ="18000"} -->
+    <!-- if (koin == "usdtidr"){ minc ="13000"} -->
+	  if (koin == "ethidr"){ maxc =laskux *2;}
+	   <!-- if (koin == "usdcidr"){ maxc ="18000"} -->
+    <!-- if (koin == "usdcidr"){ minc ="13000"} -->
+	
+ 
+		   if (koin == "bnbidr"){ maxc =laskux *2;}
+	
+		   if (koin == "daiidr"){ maxc ="24000"}
+    if (koin == "daiidr"){ minc ="13000"}
+	
+	 
+		
+	 
+	
+			   if (koin == "lgoldidr"){ maxc ="2500000"}
+    if (koin == "lgoldidr"){ minc ="500000"}
+			   if (koin == "lsilveridr"){ maxc ="40000"}
+    if (koin == "lsilveridr"){ minc ="8500"}
+	
+	 
+   if (koin == "dgxidr"){ maxc ="2500000"}
+	   if (koin == "dgxidr"){ minc ="400000"}
+   var naakoin = koin ;
+     if (koin == "demo"){ naakoin = cry +" [X] "}
+ 	 if (koin == "demo90"){ naakoin = "h-l = "+pooo}
+ var lace =7 ;
+   
+   var jenis="line";
+   var ukur="1";
+   if (koin == "demo"){ jenis ="line";  ukur="0.4";}
+    if (koin == "demo90"){ jenis ="column";  ukur="0.4"; lace =7 ;}
+var data = [];
+ 
+	
+		
+
+		var dataSeries = {type: jenis, color:"gray", lineColor: 'black',lineThickness:  0.1,  markerSize:4  } ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart( koin , {
+	 backgroundColor: "transparent ",
+  title:{
+       text: naakoin, fontSize: 13,       
+      },
+ 
+ 
+		axisX:{ 
+		
+			// interlacedColor: "#FEFDDF", 
+      
+      tickColor: "navy",
+      gridColor: "navy",
+		
+		
+	 
+		
+	 
+			  crosshair: {
+				 
+				   
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000",
+    },
+	interval:lace,maximum:mki,
+gridThickness:  0.1     , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+		  
+ 
+
+
+
+
+
+	
+		},
+ 
+	axisY : { 
+	
+// maximum:valueb,
+minimum:0,
+			 stripLines: [ 
+			 
+		   
+	 
+		 {
+		 
+		 thickness:ukur,
+            startValue:laskux,
+			
+           endValue:minc  ,
+			color:"red",
+        } ,
+		{
+		 
+	 
+            value:+akhir,
+           label:akhir  ,
+			color:"red",
+			 
+        } ,
+{ 
+         thickness:ukur,
+            value:pooo,
+         label:pooo  ,
+			color:"black",
+        } 		
+        ],
+ 
+		gridThickness:  0     , tickLength: 0, lineThickness: 0,
+lineThickness: 0,
+		 
+		  crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000",
+    },
+labelFormatter: function(){
+	return " ";
+},
+
+ 
+ 
+	},
+	 
+ 
+	data: data,  
+	navigator: data,
+     
+	});
+
+
+ if (koin == "demo90"){ 
+ dataSeries.dataPoints = dataPointsdemo90  ;
+ 
+ }else{
+
+
+	
+	dataSeries.dataPoints = dataPointsdemo  ;
+ }
+	
+	data.push(dataSeries);
+ 
+ 
+	chart.render();
+   
+	
+ 	function onClick(e) {
+	
+	Rorder(piro=alamat);
+		 
+	}
+ 
+  }
+};
+//xmlhttp.open("GET","https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/summaries" + '?' + new Date().getTime(), true);
+ xmlhttp.open("GET","api/sumaries.txt" + '?' + new Date().getTime(), true);
+xmlhttp.send(null);
+  
+  }
+ 
+ 
+ 
+  
+
+  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+		   		 
+ 		   var totbuy=0;
+var totsell=0;
+   
+   //console.log(json);
+  var dataPointsodr=[];
+ var xa=0;
+  
+  const cd  = bookorderx  ; 
+  
+  let vax = "";
+let vbx = "";
+for (const x in cd) {
+   vbx += cd[x] + ", ";
+   vax += x + ", ";
+ if (x=="buy"){
+   // console.log(x);
+     
+  
+   
+ for (var i = 0; i <  cd[x].length; i++) {
+	//   for (var i = 0; i <  10; i++) {
+        var model = cd[x][i][0] ;
+		var model1 = cd[x][i][1] ; 
+  if (i < 13){
+  var pric= (model *model1)  ; 
+  var prk=	(Math.round(pric));
+  var th = prk.toLocaleString();
+  totbuy +=model *model1;
+  var nmclas="bg-white";
+  
+  //if (prk > 10000000){nmclas="info";}
+    if (totbuy <= 10000000){nmclas="warning";}
+  
+ // document.getElementById("bookb").innerHTML  +=  '<div class="text-'+nmclas+'">  B: '+th+'  </div>';
+ //dataPointsodr.push(  {  y: prk ,name: "b",exploded:true},    );
+
+    }
+	}
+		
+	}	
+	
+
+
+
+	//////////
+	
+	 if (x=="sell"){
+   
+     
+  
+   
+ for (var i = cd[x].length - 1; i >= 0; i--) {
+
+  // for (var i = 0; i <  cd[x].length; i++) {
+	//    for (var i = 0; i <  10; i++) {
+         var model = cd[x][i][0] ;
+		var model1 = cd[x][i][1] ; 
+ if (i < 13){
+  var pric=( model *model1 ) ;;
+    var prk=	(Math.round(pric));
+	  var th = prk.toLocaleString();
+	    var nmclas="bg-white";
+    totsell +=model *model1;
+  //if (prk > 10000000){nmclas="info";}
+     if (totsell <= 10000000){nmclas="warning";}
+	 
+//   document.getElementById("books").innerHTML  +=  '<div class="text-'+nmclas+'"> S: '+th+' </div>';
+  
+ //dataPointsodr.push(  {  y: prk ,name: "s" },    );
+	}}
+ 
+		
+	}	
+	
+
+
+   
+ }
+ 
+ var ms= totsell / 1000000000;
+  var mb= totbuy / 1000000000;
+ dataPointsodr.push(  { x:1, y: totbuy,name: mb+"-M" , color:'#E8E9ED' } , {x:1, y: -totsell,name: ms+"-M" , color:'pink' } ,   );
+
+//      document.getElementById("totodr").innerHTML   =  '<div>buy : '+totbuy+'   sel  :'+totsell+'</div>';
+  	 
+ var maxz=totsell + totbuy ;
+ 
+ 
+ 
+ 
+var data = [];
+ 
+		 
+
+		var dataSeries = {type: "pie" ,indexLabel: "{name}", indexLabelFontSize: 12,  showInLegend: false,  legendText:"order book", indexLabelOrientation: "vertical",} ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("chartodr", {
+ backgroundColor: "transparent ",
+    title:{
+    text: "H BOOKS",
+    verticalAlign: "center",
+    dockInsidePlotArea: true,
+    fontColor: "#ff6384",
+    fontSize: 20,
+    fontFamily: "arial"
+  },
+		axisX:{   
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  maximum:maxz ,minimum:-maxz,
+ gridThickness:    0.5    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		
+ 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointsodr  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+ 
+ 
+ 
+ 
+ 
+ 			
+						
+////////////////////////////////
+ 
+
+var hsttotbuy =0;
+var hsttotsell =0;
+ 
+ 
+    
+ 
+ <?php
+ echo"var histoodr= $jsonhisto;";
+ ?>
+ 
+  
+   var dataPointshst =[];
+ 
+ var xa=0;
+  var ioo=0;
+  const cdm  = histoodr  ;
+  let vam = "";
+let vbm = "";
+for (const x in cdm) {
+   vbm += cdm[x] + ", ";
+   vam += x + ", ";
+ 
+  
+var datek = cdm[x]["date"]; 
+var price = cdm[x]["price"]; 
+var amount = cdm[x]["amount"]; 
+var tid = cdm[x]["tid"]; 
+var type = cdm[x]["type"];   
+var kkk = price * amount;
+  var kkko=	(Math.round(kkk));
+ 
+  
+  
+   var nmclas="bg-white";
+   
+  if (kkko > 1000000 ){nmclas="info";}
+    if (kkko > 5000000 ){nmclas="warning";} 
+	ioo++;
+	if (ioo < 13){
+	
+   document.getElementById("hist").innerHTML  +=  '<div class="text-'+nmclas+'">'+kkko+'|'+type+'</div>';
+	}
+
+if (type=="buy"){
+var ppb=price*amount;
+hsttotbuy += ppb;
+
+}
+if (type=="sell"){
+var pps=price*amount;
+hsttotsell += pps;
+}
+		//console.log(type +'      ' +price);
+	 
+   
+ }
+  var bbnc= (Math.round(hsttotsell))/1000000000;
+ var bbn= (Math.round(hsttotbuy))/1000000000;
+ 
+  dataPointshst.push(  { x:1, y: hsttotbuy,name: bbn, color:'#E8E9ED' } , {x:1,y: -hsttotsell,name: bbnc , color:'pink' } ,   );
+
+   var data = [];
+ 
+		var mas=  hsttotbuy + hsttotsell;
+
+		var dataSeries = {type: "pie" ,indexLabel: "{name}", indexLabelFontSize: 12,  showInLegend: false,  legendText:"{name}", } ;
+		
+<!-- console.log(dataSeries); -->
+
+	var chart = new CanvasJS.Chart("historytradech", {
+ backgroundColor: "transparent ",
+    title:{
+    text: "H TRADE",
+    verticalAlign: "center",
+    dockInsidePlotArea: true,
+    fontColor: "#ff6384",
+    fontSize: 20,
+    fontFamily: "arial"
+  },
+		axisX:{   
+gridThickness:  0.1    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+labelFormatter: function(){
+	return " ";
+}, 
+			  crosshair: {
+				  
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+			 
+		},
+	axisY:[{  maximum:mas,minimum:-mas,
+ gridThickness:    0.5    , tickLength: 0,
+lineThickness: 0,labelFontSize: 15, 
+  labelFontColor: "#000000",labelFormatter: function(){
+	return " ";
+}, 
+	}],
+	axisY2: {
+		
+ 
+		  
+		 crosshair: {
+        enabled: false,
+	color: "#A0A0A0",
+	labelFontColor: "#000000"
+    },
+		 
+ 
+		 
+ 
+	},
+	 
+ 
+	data: data,  
+
+     
+	});
+
+
+
+
+
+	<!-- console.log(dataPoints); -->
+	dataSeries.dataPoints = dataPointshst  ;
+	data.push(dataSeries);
+	 
+	
+	chart.render();
+ 
+  
+
+ 				
+						
+						
+ // let socket = new WebSocket("wss://kline.indodax.com/ws/");
+
+// socket.onopen = function(e) {
+ 
+  // socket.send('{"sub":"btcidr.kline.1d", "id":"1"}');
+// };
+
+// socket.onmessage = function(event) {
+  // console.log(`  ${event.data}`);
+  
+  
+  
+  
+  
+  
+// };
+
+
+
+ 
+
+// socket.onclose = function(event) {
+  // if (event.wasClean) {
+   // console.log(`[close] Connection putus, code=${event.code} reason=${event.reason}`);
+  // } else {
+     
+    // console.log('[close] Connection  putus');
+  // }
+// };
+
+// socket.onerror = function(error) {
+  // console.log (`[error] ${error.message}`);
+// };
+
+
+
+
+ 
+ 
+
+
+// socket.onopen = function(e) {
+ 
+  // socket.send('{"unsub":"btcidr.kline.1d", "id":"1"}');
+
+// };
+ 
+
+
+
+
+function chat(){
+ 
+        var
+               chatroom,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+               chatroom = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                   chatroom = new ActiveXObject('Msxml2.XMLHTTP');
+					
+					
+					
+                } catch(e) {
+                   chatroom = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if (chatroom) {
+			
+			
+			
+			
+			
+               chatroom.onreadystatechange = function()
+                {
+				
+ 
+  	 			
+				
+                    if (/4|^complete$/.test(chatroom.readyState)) {
+		  document.getElementById("chatroom").innerHTML  ="";
+   
+		   $str = chatroom.responseText;		
+ 		   
+   json = JSON.parse($str);
+   
+ 
+ var xa=0;
+  
+  const cd  = json.data ;
+  let va = "";
+let vb = "";
+for (const x in cd) {
+   vb += cd[x] + ", ";
+   va += x + ", ";
+ 
+  
+  
+ //document.getElementById("chatroom").innerHTML +=name;
+   
+ for (var i = 0; i <  cd[x].length; i++) {
+        var model = cd[x][i]["username"];
+		 var pesan = cd[x][i]["content"];
+		  var time = cd[x][i]["timestamp"];
+		 var level = cd[x][i]["level"];
+ //console.log( model);
+ var maxLength = 40 // maximum number of characters to extract
+
+//trim the string to the maximum length
+var trimmedString = pesan.substr(0, maxLength);
+var yoo ="dark";
+ if (level==5){yoo ="danger";}
+  if (level==4){yoo ="success";}
+   if (level==3){yoo ="primary";}
+    if (level==2){yoo ="warning";}
+ document.getElementById("chatroom").innerHTML  += "<a class=text-"+yoo+"> @"+model+" :</a> <a class=text-dark> "+trimmedString+"</a><br>";
+ 
+  
+ 
+   
+    }
+		
+		
+	 
+   
+ }
+ 
+   
+  
+
+                        setTimeout(function(){$self(); 
+					  
+						return false;
+						},  50000000      );
+                    }else{
+						
+						
+						
+						if(navigator.onLine) {
+ 
+} else {
+				 
+return false;
+
+				
+}
+						
+
+
+
+}
+				
+					  };
+            //chatroom.open('GET', 'https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/v2/chatroom/history' + '?' + new Date().getTime(), true);
+              chatroom.open('GET', 'https://proxy.onionsearchengine.com/index.php?q=https://indodax.com/api/v2/chatroom/history' + '?' + new Date().getTime(), true);
+              
+			  chatroom.send(null);
+
+
+ }}
+   
+ 
+  
+ 
+
+ 
+ 
+ 
+ 
+ 
+<!-- var xhr = new XMLHttpRequest(); -->
+<!-- xhr.open("GET", "https://data-asg.goldprice.org/GetData/IDR-XAU/1"); -->
+ 
+<!-- xhr.addEventListener("load", () => { -->
+ <!-- alert(xhr.responseText); -->
+<!-- }); -->
+
+
+<!-- var xhr = new XMLHttpRequest(); -->
+<!-- xhr.open("POST", "https://reqres.in/api/users"); -->
+<!-- xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); -->
+<!-- xhr.send("name=Muhamad Nauval Azhar&job=Back-end Developer"); -->
+<!-- xhr.addEventListener("load", () => { -->
+  <!-- console.log(xhr.responseText); -->
+<!-- }); -->
+   
+  
+<!-- var xhr = new XMLHttpRequest(); -->
+<!-- xhr.open('GET', 'https://data-asg.goldprice.org/GetData/IDR-XAU/1', true); -->
+<!-- xhr.withCpinkentials = true; -->
+<!-- xhr.onreadystatechange = function() { -->
+    <!-- if(xhr.readyState == 4 && xhr.status == 200) { -->
+         <!-- console.log(xhr.responseText); -->
+        
+        <!-- var cookie = xhr.getResponseHeader("Cookie"); -->
+        <!-- alert("Cookie: " + cookie); -->
+    <!-- } -->
+<!-- } -->
+<!-- xhr.send(); -->
+
+
+
+ <!-- const uribb = 'https://data-asg.goldprice.org/GetData/IDR-XAU/1'; -->
+ <!-- let hc = new Headers();  -->
+ <!-- hc.append('Content-Type','application/x-www-form-urlencoded');  -->
+ 
+<!-- let reqc = new Request(uribb, { -->
+    <!-- method: 'GET', -->
+    <!-- headers: hc,  -->
+<!-- }); -->
+<!-- fetch(reqc) -->
+    <!-- .then( -->
+    <!-- function(response) { -->
+      <!-- if (response.status !== 200) { -->
+        <!-- console.log('error: ' +  response.status); -->
+        <!-- return; -->
+      <!-- } -->
+
+    
+      <!-- response.text().then(function(data) { -->
+	  
+<!-- //	  myArray = JSON.Parse(data); -->
+	<!-- //  emasidr= myArray[1]; -->
+	      <!-- console.log(data);  -->
+		 
+		  <!-- }) -->
+	   <!-- }  -->
+<!-- )	   -->
+
+
+
+
+
+
+
+// Php 
+// You can add cookie to header and get with (session works without it) 
+<!-- header('Cookie: PHPSESSID='.$_COOKIE['PHPSESSID']); -->
+<!-- header('Access-Control-Allow-Origin: *'); -->
+<!-- header('Access-Control-Allow-Methods: GET, POST, OPTIONS'); -->
+<!-- header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With, Set-Cookie, Cookie, Bearer'); -->
+<!-- header('Access-Control-Allow-Cpinkentials: true'); -->
+<!-- header('Access-Control-Max-Age: 86400'); -->
+
+
+
+
+
+
+
+  <!-- var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  -->
+  
+<!-- db.transaction(function (tx) { -->
+  <!-- tx.executeSql('DROP TABLE  inch'); -->
+<!-- }); -->
+ 
+
+  
+ 
+ //########################
+
+	 
+	//orderrrrr
+	 
+	 
+ 
+ 
+
+    function Rorder(piro){
+	
+   var urib = 'https://indodax.com/tapi/';
+
+ var nonce=Math.floor(Date.now() / 1000);
+  var postb ='method=trade&'+piro+'&nonce='+nonce;
+ var sha512screet = CryptoJS.HmacSHA512(postb, screet);
+   //  console.log(postb+' : '+ piro  );
+ let hb = new Headers(); 
+ hb.append('Content-Type','application/x-www-form-urlencoded'); 
+   hb.append('User-Agent','ES MELON  \n\r'); 
+
+hb.append('Sign', sha512screet)
+hb.append('Key', key) 
+let reqb = new Request(urib, {
+    method: 'POST',
+    headers: hb,
+    body: postb ,
+});
+fetch(reqb)
+.then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('error: ' +  response.status);
+        return;
+      }
+
+    
+      response.text().then(function(data) {
+	  
+	   myObj = JSON.parse(data);
+	     var sussi  = myObj.success;
+   alert( data + piro);
+ 		
+  const text  = myObj.success;
+    const eror  = myObj.error;
+	 
+		  	  
+		 setCookie("balance",1,7);
+		
+		
+		
+	//	console.log(data );
+		
+		
+
+ document.location.reload();
+   
+ 	var no =data;
+	 
+ 
+ 
+  })
+  
+  	 })
+	 
+	
+		 
+	}
+	 
+	
+ 
+  
+ 
+ 
+ 
+ 
+ setCookiexxx( "balance" ,0,7);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+   
+  </script>
+  
+  
+  
+  
+  
+
+
+
+
+
+
+ <!-- <script > -->
+ <!-- window.addEventListener("load", function(event) {location.replace(' ');}); -->
+ <!-- </script>  -->
+
+
+
+	<script type="text/javascript">
+        setTimeout(function() {chat(); 
+		 
+		
+		return false;
+		
+		},  500);
+		    
+
+		   
+		   
+    </script>
+
+ 
+	<script type="text/javascript">
+        setTimeout(function() { name(); 
+		 
+		
+		return false;
+		
+		},   500);
+		    
+
+		   
+		   
+    </script>
+
+ 
+ 
+
+</script>
+
+ <div class="chart"></div>
+
+
+
+
+
